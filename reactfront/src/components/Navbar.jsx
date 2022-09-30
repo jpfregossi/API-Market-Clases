@@ -91,7 +91,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         {user ? user.role === 'profesor' ?
-          <LeftTutor>Panel Profestor</LeftTutor>
+          <LeftTutor>Gestión Profestor</LeftTutor>
           :
           <Left>
             <Link to="/cart">
@@ -137,10 +137,10 @@ const Navbar = () => {
           :
           <Right>
             <Link to="/register" style={{ color: "black", textDecoration: "none" }} >
-              <MenuItem>REGISTER</MenuItem>
+              <MenuItem>REGISTRATE!</MenuItem>
             </Link>
             <Link to="/login" style={{ color: "black", textDecoration: "none" }}>
-              <MenuItem>SIGN IN</MenuItem>
+              <MenuItem>INGRESAR</MenuItem>
             </Link>
           </Right>
         }
