@@ -9,6 +9,7 @@ import Twitter from '@mui/icons-material/Twitter';
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useState } from 'react';
 
 
 const Left = styled.div`
@@ -145,13 +146,43 @@ const Div = styled(Tooltip)`
   }
 `
 
+const Modal = styled.div `
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #8d8d8d4f;
+  position: absolute;
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const CourseCard = styled.div `
+  width: 450px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  align-text: center;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+`;
+
 const datos = [
     {
         curso: "matematica",
         alumno: "nico",
         tipo: "individual",
         frecuencia: "semanal",
-        estado: "ACEPTADA",
+        estado: "SOLICITADA",
         comentario: "Por ahora viene bien, veremos...",
         calificacion: 4.5
     },{
@@ -160,7 +191,7 @@ const datos = [
         tipo: "grupal",
         frecuencia: "unica",
         estado: "ACEPTADA",
-        comentario: "Sin comentaris",
+        comentario: "Sin comentarios",
         calificacion: 4
     },{
         curso: "historia",
@@ -183,9 +214,37 @@ const datos = [
 
 
 export default function Footer() {
+  const [showModal, setShowModal] = useState(null);
+
+  const handleActionsClick = (order) => {
+    console.log("Order: ", order);
+    setShowModal(order);
+  };
+
+  const handleOutsideClick = (e) => {
+    console.log("Clickeó afuera");
+    setShowModal(null);
+  };
+
+  console.log("showModal: ", showModal);
 
   return (
     <div style={{display: 'flex'}}>
+      { showModal && (
+        <Modal onClick={handleOutsideClick}>
+          <CourseCard>
+            <div>{showModal.curso}</div>
+            <div>{showModal.alumno}</div>
+            <div>{showModal.tipo}</div>
+            <div>{showModal.frecuencia}</div>
+            <div>{showModal.estado}</div>
+            <div>{showModal.calificacion}</div>
+            <Button>{
+              showModal.estado === "SOLICITADA" ? "ACEPTAR" : (showModal.estado == "ACEPTADA" ? "CANCELAR" : "FINALIZAR") 
+            }</Button>
+            <Button>RECHAZAR COMENTARIO</Button>
+          </CourseCard>
+        </Modal>) }
       <Courses>
         <Course>
             matematica
@@ -217,7 +276,6 @@ export default function Footer() {
           </Bar>
           <div>
             {datos.map((order) => {
-              for (let i=0; i < datos.length; i++) {
                 return (
                 <>
                   <hr />
@@ -228,11 +286,10 @@ export default function Footer() {
                     <span style={{flex:1}}>{order.frecuencia}</span>
                     <span style={{flex:1}}>{order.estado}</span>
                     <span style={{flex:1}}>{order.calificacion}<Tooltip class="tooltiptext">{order.comentario}</Tooltip></span>
-                    <span style={{flex:1}}><input type="button" value="..." /></span>
+                    <span style={{flex:1}}><input type="button" value="..." onClick={(e) => handleActionsClick(order)}/></span>
                   </Bar2>
                 </>
                 )
-              }
             })}
           </div>
         </Container>
