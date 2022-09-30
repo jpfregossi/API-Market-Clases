@@ -83,7 +83,7 @@ export default function Login() {
       <Wrapper>
         <Title>LOG IN</Title>
         <Form>
-          <Input placeholder="usuarui" onChange={(e) => setUsername(e.target.value)}/>
+          <Input placeholder="usuario" onChange={(e) => setUsername(e.target.value)}/>
           <Input placeholder="contraseña" type="password" onChange={(e) => setPassword(e.target.value)}/>
           <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
           {error && <Error>Algo salio mal...</Error>}

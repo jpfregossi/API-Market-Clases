@@ -1,7 +1,12 @@
-import React from 'react'
-import Send from '@mui/icons-material/Send';
+import React from "react";
+import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { newsletterregister } from "../redux/apiCalls";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60vh;
@@ -17,7 +22,7 @@ const Title = styled.h1`
 `;
 
 const Desc = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
@@ -40,23 +45,47 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  flex: 1;
+  width: 100%;
+  height: 100%;
   border: none;
   background-color: teal;
   color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(0, 59, 59);
+  }
 `;
 
-export default function Newsletter() {
+const Newsletter = () => {
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const handleClick = (e) => {
+    newsletterregister(dispatch, { email });
+  };
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <Container>
       <Title>Newsletter</Title>
       <Desc>Reciba las ultimas novedades de las clases que buscas</Desc>
       <InputContainer>
-        <Input placeholder="Tu Email" />
-        <Button>
-          <Send />
-        </Button>
+        <Input placeholder="Your e-mail" style={{outline: "none", border: "none"}} onChange={(e) => setEmail(e.target.value)} />
+        {user
+        ?
+        <Link to="/newsletterregister" style={{textDecoration: "none", color: "white", flex: 1}}>
+            <Button onClick={handleClick}>
+              <Send />
+            </Button>
+        </Link>
+        :
+        <Link to="/login" style={{textDecoration: "none", color: "white", flex: 1}}>
+            <Button>
+              <Send />
+            </Button>
+        </Link>
+        } 
       </InputContainer>
     </Container>
-  )
-}
+  );
+};
+
+export default Newsletter;

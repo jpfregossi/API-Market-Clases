@@ -84,9 +84,13 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.orders = action.payload;
     },
+    
     getUserOrdersFailure: (state) => {
       state.isFetching = false;
       state.error = true;
+    },
+    editOrderStart: (state) => {
+      state.isFetching = true;
     },
   },
 });
