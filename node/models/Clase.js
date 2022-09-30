@@ -13,8 +13,7 @@ const ClaseSchema = new mongoose.Schema(
     price: {type: Number},
     duracion: {type: Number},
     inStock: { type: Boolean, default: true },
-
-    },
+  },
   { timestamps: true }
 );
 

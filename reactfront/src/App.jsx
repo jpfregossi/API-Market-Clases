@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import Security from "./pages/Security";
 import Orders from "./pages/Orders";
 import Tutor from "./pages/Tutor";
+import NewCourse from './pages/NewCourse';
 
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/profile/securitysettings" element={user ? <Security /> : <Login/> }></Route>
         <Route path="/profile/orders" element={user ? <Orders /> : <Login/> }></Route>
         <Route path="/tutor" element={user && user.role === "profesor" ? <Tutor /> : <Login/> }></Route>
+        <Route path="/tutor/newcourse" element={user && user.role === "profesor" ? <NewCourse /> : <Login/> }></Route>
       </Routes>
      </Router>
   );
