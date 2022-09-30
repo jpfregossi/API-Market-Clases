@@ -5,12 +5,13 @@ const UserSchema = new mongoose.Schema(
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    fechaNac: {type: Date, required: true},
-    primario: {type: Array}, //Son 2 boolenos en el array, 1) Curso el primario? true or false ---- 2) Lo termino? true or false
-    secundario: {type: Array},
-    terciario: {type: Array},
-    universitario: {type: Array},
-    isAdmin: { type: Boolean, default: false,},
+    role: { type: String, required: true },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    birthDate: {type: Date, required: true},
+    studies: {type: String}, //TODO: hacerlo más sofisticado si queda tiempo
     img: { type: String },
   },
   { timestamps: true }
