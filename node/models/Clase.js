@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const ClaseSchema = new mongoose.Schema(
   {
+    teacherId: { type: String, required: true },
     title: { type: String, required: true },
     desc: { type: String, required: true },
-    img: { type: String, },
+    img: { type: String, required: true },
     categories: { type: Array },
     materia: { type: String },
     tipo: { type: Array },

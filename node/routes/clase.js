@@ -1,4 +1,6 @@
+const { Mongoose } = require("mongoose");
 const Clase = require("../models/Clase");
+const Contratacion = require("../models/Contratacion");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -76,6 +78,43 @@ router.get("/", async (req, res) => {
     }
 
     res.status(200).json(clases);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// CREATE CONTRATACION
+
+router.post("/contratar", verifyToken, async (req, res) => {
+  req.body.alumnoId = req.user.id;
+
+  const newContratacion = new Contratacion(req.body);
+
+  try {
+    const savedContratacion = await newContratacion.save();
+    res.status(200).json(savedContratacion);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// CREATE CONTRATACION
+
+router.get("/alumno/clases", verifyToken, async (req, res) => {
+  req.body.alumnoId = req.user.id;
+
+  const contrataciones = await Contratacion.find({ alumnoId: req.user.id});
+
+  const clasesCompletas = contrataciones.map(async contratacion => {
+    const clase = await Clase.findOne({ _id: contratacion.claseId });
+    console.log("Clase: ", clase);
+    return { ...contratacion._doc, title: clase.title, desc: clase.desc, price: clase.price, duracion: clase.duracion }
+  });
+
+  const response = await Promise.all(clasesCompletas);
+
+  try {
+    res.status(200).json( response );
   } catch (err) {
     res.status(500).json(err);
   }
