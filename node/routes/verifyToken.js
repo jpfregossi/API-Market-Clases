@@ -10,6 +10,7 @@ const verifyToken = (req, res, next) => {
       next();
     });
   } else {
+    console.log("headers: ", req.headers);
     return res.status(401).json("You are not authenticated!");
   }
 };
