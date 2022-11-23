@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Contratacion = require("../models/Contratacion");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -14,14 +15,32 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
 
   try {
     const savedOrder = await newOrder.save();
+   
+    for (const product of req.body.products ) {
+      console.log("Producto: ", product);
+      const newContratacion = new Contratacion({
+        alumno_id: req.user.id,
+        teacher_id: product.teacher_id,
+        clase_id: product.clase_id,
+        tipo: product.tipo,
+        frecuencia: product.frecuencia,
+        contacto: product.contacto,
+        horario: product.horario,
+        mensaje: product.mensaje,
+      });
+      
+      await newContratacion.save();
+    };
+
     res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);
+    console.log("Err: ", err);
   }
 });
 

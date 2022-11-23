@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
+const feedback = require("./Feedback");
 
 const ClaseSchema = new mongoose.Schema(
   {
-    teacherId: { type: String, required: true },
+    teacher_id: { type: mongoose.Schema.ObjectId, required: true },
     title: { type: String, required: true },
     desc: { type: String, required: true },
     img: { type: String, required: true },
     categories: { type: Array },
-    materia: { type: String },
     tipo: { type: Array },
     frecuencia: { type: Array },
-    calificacion: { type: Array},
+    calificacion: { type: Number },
     price: {type: Number},
     duracion: {type: Number},
     inStock: { type: Boolean, default: true },

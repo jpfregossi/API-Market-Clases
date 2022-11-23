@@ -108,7 +108,7 @@ const Clase = ({ item }) => {
         </Icon>
         <Rating
                 name="calificacion"
-                value={parseInt(item.calificacion[0])}
+                value={parseInt(item.calificacion ? item.calificacion : 0)}
                 readOnly
                 precision={0.5}
                 emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}/> 

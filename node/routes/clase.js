@@ -11,7 +11,10 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", async (req, res) => {
+router.post("/register", verifyToken, async (req, res) => {
+  req.body.teacher_id = req.user.id;
+  console.log("teacher_id: ", req.body.teacher_id);
+
   const newClase = new Clase(req.body);
 
   try {

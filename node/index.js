@@ -9,6 +9,7 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const commentsratingsRoute = require("./routes/commentsratings");
+const feedbackRoute = require("./routes/feedback");
 const newsletterRoute = require("./routes/newsletter");
 const cors = require("cors");
 
@@ -37,7 +38,8 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/mails", newsletterRoute);
 app.use("/api/checkout", stripeRoute);
-app.use("/api/commentsratings", commentsratingsRoute);
+app.use("/api/commentsratings", commentsratingsRoute); // TODO retirar una vez quede funcionando feedback
+app.use("/api/feedback", feedbackRoute);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");

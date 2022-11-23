@@ -109,6 +109,7 @@ const Orders = () => {
   const userOrders = useSelector((state) => state.user.orders)
   const userId = useSelector((state)=>state.user.currentUser._id)
   const usr = useSelector((state)=>state.user.currentUser?  state.user.currentUser.username : "")
+  const currentUser = useSelector((state)=>state.user.currentUser)
 
 
   const admin = useSelector((state)=>state.user.currentUser? state.user.currentUser.isAdmin : false)
@@ -136,9 +137,6 @@ const Orders = () => {
     setEditMode(dispatch)
   }
 
-
-
-
   const handleEdit2 = (commentid, text, rating) => {
 
     let txt = "";
@@ -163,14 +161,12 @@ const Orders = () => {
     setRating2(newRating2)
   }
   const handleClick4 = () => {
-    addComment(dispatch, usr, id, rating, text )
+    addComment(dispatch, id, rating, text, currentUser.accessToken )
   }
 
   const handleClick5 = () => {
     console.log()
     console.log("crear funcion updateOrder en apiCall")
-
-
   }
 
 
@@ -251,15 +247,15 @@ const Orders = () => {
                 </Duo3>
               </Duo2>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.text}</span>
+                <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.message}</span>
                 {admin ? 
                 <div style={{cursor:"pointer"}} id="iconcontainer">
-                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.text, comment.rating)}/>
+                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.message, comment.rating)}/>
                   <DeleteOutlineIcon style={{color:"red"}} onClick={()=>handleDelete(comment._id)}/>
                 </div>
                 : usr === comment.username ?
                 <div style={{cursor:"pointer"}} id="iconcontainer">
-                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.text, comment.rating)}/>
+                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.message, comment.rating)}/>
                   <DeleteOutlineIcon style={{color:"red"}} onClick={()=>handleDelete(comment._id)}/>
                 </div>
                 : <></>

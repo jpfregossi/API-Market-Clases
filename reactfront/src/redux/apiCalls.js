@@ -1,8 +1,9 @@
 
 import { updateCredentialsStart, updateCredentialsSuccess, updateCredentialsSuccess2, getUserOrdersStart, getUserOrdersSuccess, getUserOrdersFailure, updateCredentialsFailure, loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, newsletterregisterStart,  newsletterregisterSuccess, newsletterregisterFailure, checkCurrentPasswordStart, checkCurrentPasswordSuccess, checkCurrentPasswordFailure} from "./userRedux";
 import { addCommentStart, addCommentSuccess, addCommentFailure, getCommentStart, getCommentSuccess, getCommentFailure, deleteCommentStart, deleteCommentSuccess, deleteCommentFailure, editCommentStart, editCommentSuccess, editCommentFailure, setEditModeStart, setEditModeSuccess, setEditModeFailure } from "./commentsratingsRedux";
+import { registerClaseStart, registerClaseSuccess, registerClaseFailure, updateClaseStart, updateClaseSuccess, updateClaseFailure } from "./claseRedux";
+import { userRequest, publicRequest } from "../requestMethods";
 
-import { publicRequest } from "../requestMethods";
 const CryptoJS = require("crypto-js");
 
 export const login = async (dispatch, user) => {
@@ -44,14 +45,18 @@ export const register = async (dispatch, user) => {
   }
 };
 
-export const addComment = async (dispatch, username, id, rating, text) => {
+export const addComment = async (dispatch, id, rating, text, token) => {
   dispatch(addCommentStart());
   try {
-    const res = await publicRequest.post("/commentsratings/addcommentrating", {
-      username: username, 
-      id: id, 
-      rating: rating, 
-      text: text
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    console.log("id: " + id + " rating: " + rating + " text" + text + " token: " + token);
+    const res = await userRequest.post("/feedback", {
+      clase_id: id,
+      rating: rating,
+      message: text
     });
     dispatch(addCommentSuccess(res.data));
   } catch (err) {
@@ -62,7 +67,7 @@ export const addComment = async (dispatch, username, id, rating, text) => {
 export const deleteComment = async (dispatch, commentid) => {
   dispatch(deleteCommentStart());
   try {
-    const res = await publicRequest.delete(`/commentsratings/deletecommentrating/${commentid}`);
+    const res = await publicRequest.delete(`/feedback/delete/${commentid}`);
     dispatch(deleteCommentSuccess(commentid));
   } catch (err) {
     dispatch(deleteCommentFailure());
@@ -73,7 +78,7 @@ export const deleteComment = async (dispatch, commentid) => {
 export const getCommentsratings = async (dispatch, id) => {
   dispatch(getCommentStart());
   try {
-    const res = await publicRequest.get(`/commentsratings/find/${id}`);
+    const res = await publicRequest.get(`/feedback/find/${id}`);
     dispatch(getCommentSuccess(res.data));
   } catch (err) {
     dispatch(getCommentFailure());
@@ -83,7 +88,7 @@ export const getCommentsratings = async (dispatch, id) => {
 export const updateComment = async (dispatch, commentid, text, rating) => {
   dispatch(editCommentStart());
   try {
-    const res = await publicRequest.put(`/commentsratings/editcommentrating/${commentid}`, {
+    const res = await publicRequest.put(`/feedback/update/${commentid}`, {
       text: text,
       rating: rating
     });
@@ -139,6 +144,20 @@ export const getUserOrders = async (dispatch, userId) => {
     dispatch(getUserOrdersSuccess(res.data));
   } catch (err) {
     dispatch(getUserOrdersFailure());
+  }
+};
+
+export const registerClase = async (dispatch, token, newClase) => {
+  dispatch(registerClaseStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const res = await userRequest.post("/clases/register", newClase);
+    dispatch(registerClaseSuccess(res.data));
+  } catch (err) {
+    dispatch(registerClaseFailure());
   }
 };
 

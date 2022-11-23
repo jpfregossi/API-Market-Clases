@@ -68,7 +68,6 @@ const Duo3 = styled.div`
 
 const Success = () => {
   const location = useLocation();
-  //in Cart.jsx I sent data and cart. Please check that page for the changes.(in video it's only data)
   const data = location.state.stripeData;
   const cart = location.state.products;
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -78,14 +77,23 @@ const Success = () => {
   const [address, setAddress] = useState([]);
   const [total, setTotal] = useState(null);
 
+  userRequest.interceptors.request.use(function (config) {
+    config.headers.Authentication =  currentUser.accessToken;
+    return config;
+  });
+
   useEffect(() => {
     const createOrder = async () => {
       try {
         const res = await userRequest.post("/orders", {
           userId: currentUser._id,
           products: cart.products.map((item) => ({
-            productId: item.title,
-            quantity: item.quantity,
+            clase_id: item._id,
+            teacher_id: item.teacher_id,
+            tipo: item.tipo[0],
+            frecuencia: item.frecuencia[0],
+            horario: item.horario,
+            mensaje: item.mensaje,
           })),
           amount: cart.total,
           address: data.billing_details.address,
