@@ -102,10 +102,7 @@ const Clase = ({ item }) => {
           <Link to={`/clase/${item._id}`}>
             <SearchOutlinedIcon/>
           </Link>
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlinedIcon />
-        </Icon>
+        </Icon> 
         <Rating
                 name="calificacion"
                 value={parseInt(item.calificacion ? item.calificacion : 0)}

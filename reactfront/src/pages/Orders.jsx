@@ -53,6 +53,7 @@ const Duo = styled.div`
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   margin-top:10px;
+  ${mobile({ display: "block" })};
 `;
 
 const Duo2 = styled.div`
@@ -62,6 +63,7 @@ const Duo2 = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+
 `;
 
 const Duo3 = styled.div`

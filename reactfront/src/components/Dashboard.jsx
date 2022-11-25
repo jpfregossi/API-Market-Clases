@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { acceptContratacion, acceptFeedback, blockFeedback } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 
 const Left = styled.div`
@@ -217,11 +218,14 @@ const datos = [
 
 
 export default function Dashboard({ clases }) {
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(null);
   const [showDescargo, setShowDescargo] = useState(null);
   const [descargo, setDescargo] = useState(null);
   const currentUser = useSelector((state) => state.user.currentUser)
+
+  const history = useNavigate();
 
   const handleActionsClick = (contratacion) => {
     console.log("Order: ", contratacion);
@@ -244,6 +248,12 @@ export default function Dashboard({ clases }) {
     e.preventDefault();
     console.log("Clickeó " + action + " para " + id);
     acceptContratacion(dispatch, id, action, currentUser.accessToken);
+  };
+
+  const handleEditarClick = (e, clase) => {
+    e.preventDefault();
+    console.log("Editar clase: ", clase);
+    history("/tutor/newcourse", {state:{clase: clase,}});
   };
 
   const handleCommentAction = (e, action, id) => {
@@ -300,10 +310,10 @@ export default function Dashboard({ clases }) {
             </ButtonsContainer>
             <ButtonsContainer>
               <textarea
-                type="textarea" 
+                type="textarea"
                 name="textValue"
                 value={descargo}
-                style={{width: '200px', height:'100px'}}
+                style={{ width: '200px', height: '100px' }}
                 onChange={(e) => setDescargo(e.target.value)}
               />
             </ButtonsContainer>
@@ -423,6 +433,30 @@ export default function Dashboard({ clases }) {
             )
           })
           )}
+        </div>
+        <Bar>
+          <span style={{ flex: 1 }}>Clases Creadas</span>
+        </Bar>
+        <Bar>
+          <span style={{ flex: 1 }}>Curso</span>
+          <span style={{ flex: 1 }}>Acciones</span>
+        </Bar>
+        <div>
+          {clases.map((clase) => {
+            return (
+              <>
+                <hr />
+                <Bar2>
+                  <span style={{ flex: 1 }}>{clase.title}</span>
+                  <span style={{ flex: 1 }}>
+                    <input type="button" value="ELIMINAR" onClick={(e) => handleEditarClick(e, clase)} />
+                    <input type="button" value="EDITAR" onClick={(e) => handleEditarClick(e, clase)} />
+                  </span>
+                </Bar2>
+              </>
+            )
+          })
+          }
         </div>
       </Container>
     </div>

@@ -1,6 +1,7 @@
 const Clase = require("../models/Clase");
 const Feedback = require("../models/Feedback");
 const Contratacion = require("../models/Contratacion");
+const nodemailer = require('nodemailer');
 
 
 const getTutorClases = async (id) => {
@@ -37,6 +38,46 @@ const getTutorClases = async (id) => {
     }
 }
 
+const enviarMail = async function ( tipo, destinatario, motivo){
+    console.log("destinatario: ", destinatario.toString());
+
+    const bodyRechazo = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su comentario fue rechazad0 por no poder ajustarse a los requisitos del profesor.</b></h4><br></br><p>MOTIVO: </p>' + motivo;
+    const bodyCancelacion = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su contratacion fue rechazada por motivos del profesor:</b></h4><br></br><p>MOTIVO: </p>' + motivo;
+    
+    // Definimos el transporter
+    var transporter = nodemailer.createTransport({
+        secure: true,
+        port:465,
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+            user: 'bottesteador@gmail.com',
+            pass: 'kfzcxmbhlyqwtuka'
+        }
+    });
+    // Definimos el email
+    var mailOptions = {
+        from: 'bottesteador@gmail.com',
+        to: destinatario.toString(),
+        subject: 'Comentario rechazado por el profesor',
+        html: (tipo === "RECHAZO") ? bodyRechazo : bodyCancelacion,
+        //html: '<img src="'+imgInscripcion+'" /><a href="'+linkMP+'"><img src="'+imgMP+'" /></a><a href="'+linkPago+'"><img src="'+imgRegistro+'" /></a>',
+        
+    };
+    console.log("mail enviado: ",mailOptions)
+    // Enviamos el email
+    try
+    {
+        let info = await transporter.sendMail(mailOptions);
+        console.log("Message sent: %s", info.messageId);
+    }
+    catch(error)
+    {
+        console.log("Error envio mail: ",error);            
+    }
+};
+
 module.exports = {
-    getTutorClases
+    getTutorClases,
+    enviarMail
 };

@@ -12,6 +12,7 @@ const commentsratingsRoute = require("./routes/commentsratings");
 const feedbackRoute = require("./routes/feedback");
 const newsletterRoute = require("./routes/newsletter");
 const tutorRoute = require("./routes/tutor");
+var MailController = require('./controllers/mail.controller');
 const cors = require("cors");
 
 dotenv.config();
@@ -42,6 +43,8 @@ app.use("/api/checkout", stripeRoute);
 app.use("/api/commentsratings", commentsratingsRoute); // TODO retirar una vez quede funcionando feedback
 app.use("/api/feedback", feedbackRoute);
 app.use("/api/tutor", tutorRoute);
+
+app.use('/api/sendMail',MailController.enviarMailRechazo);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");

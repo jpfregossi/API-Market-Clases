@@ -1,7 +1,7 @@
 const Feedback = require("../models/Feedback");
 const User = require("../models/User");
 const { verifyToken } = require("./verifyToken");
-const { getTutorClases } = require("./common");
+const { getTutorClases, enviarMail } = require("./common");
 
 const router = require("express").Router();
 
@@ -67,6 +67,10 @@ router.put("/block", verifyToken, async (req, res) => {
 
       console.log("Feedback Update: ", updatedFeedback);
 
+      const alumno = await User.findById(updatedFeedback.user_id);
+
+      await enviarMail("RECHAZO", alumno.email, req.body.message != undefined ? req.body.message : null);
+
       const response = await getTutorClases(req.user.id);
 
       res.status(200).json(response);
@@ -90,6 +94,8 @@ router.put("/accept", verifyToken, async (req, res) => {
       );
 
       console.log("Feedback Update: ", updatedFeedback);
+
+      await enviarMail("CANCELACION", alumno.email, req.body.message != undefined ? req.body.message : null);
       
       const response = await getTutorClases(req.user.id);
 
