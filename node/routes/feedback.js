@@ -18,7 +18,7 @@ router.get("/find/:clase_id", async (req, res) => {
   
 // add comment & rating for product 
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   if (req.user) {
   try {
     const commitingUser = await User.findById( req.user.id );
