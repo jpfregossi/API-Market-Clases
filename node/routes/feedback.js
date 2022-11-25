@@ -1,6 +1,7 @@
 const Feedback = require("../models/Feedback");
 const User = require("../models/User");
 const { verifyToken } = require("./verifyToken");
+const { getTutorClases } = require("./common");
 
 const router = require("express").Router();
 
@@ -47,24 +48,57 @@ router.delete("/delete/:id", verifyToken, async (req, res) => {
     res.status(200).json(deletedFeedback);
   } catch (err) {
     res.status(500).json(err);
+    console.log("Error: ", err);
   }
 });
 
-// edit comment with rating 
-
-router.put("/update/:id", verifyToken, async (req, res) => { 
+// BLOCK FEEDBACK
+router.put("/block", verifyToken, async (req, res) => { 
+  if (req.user) {
     try {
-      const updatedFeedback = await CommentsRatings.findByIdAndUpdate(
-        req.params.id,
+      const updatedFeedback = await Feedback.findByIdAndUpdate(
+        req.body.id,
         {
-          state: req.body.rating,
-          disclaimer: req.body.disclaimer != undefined ? req.body.disclaimer : null
+          state: "BLOQUEADO",
+          disclaimer: req.body.message != undefined ? req.body.message : null
         },
+        { new: true },
       );
-      res.status(200).json(updatedFeedback);
+
+      console.log("Feedback Update: ", updatedFeedback);
+
+      const response = await getTutorClases(req.user.id);
+
+      res.status(200).json(response);
     } catch (err) {
       res.status(500).json(err);
+      console.log("Error: ", err);
     }
+  }
+});
+
+// ACCEPT FEEDBACK
+router.put("/accept", verifyToken, async (req, res) => { 
+  if (req.user) {
+    try {
+      const updatedFeedback = await Feedback.findByIdAndUpdate(
+        req.body.id,
+        {
+          state: "ACEPTADO",
+        },
+        { new: true },
+      );
+
+      console.log("Feedback Update: ", updatedFeedback);
+      
+      const response = await getTutorClases(req.user.id);
+
+      res.status(200).json(response);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log("Error: ", err);
+    }
+  }
 });
 
 

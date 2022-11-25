@@ -3,6 +3,7 @@ import { updateCredentialsStart, updateCredentialsSuccess, updateCredentialsSucc
 import { addCommentStart, addCommentSuccess, addCommentFailure, getCommentStart, getCommentSuccess, getCommentFailure, deleteCommentStart, deleteCommentSuccess, deleteCommentFailure, editCommentStart, editCommentSuccess, editCommentFailure, setEditModeStart, setEditModeSuccess, setEditModeFailure } from "./commentsratingsRedux";
 import { registerClaseStart, registerClaseSuccess, registerClaseFailure, updateClaseStart, updateClaseSuccess, updateClaseFailure } from "./claseRedux";
 import { userRequest, publicRequest } from "../requestMethods";
+import { getTutorStart, getTutorSuccess, getTutorFailure, acceptContratacionStart, acceptContratacionSuccess, acceptContratacionFailure, acceptFeedbackStart, acceptFeedbackSuccess, acceptFeedbackFailure, blockFeedbackStart, blockFeedbackSuccess, blockFeedbackFailure }  from "./tutorRedux";
 
 const CryptoJS = require("crypto-js");
 
@@ -161,3 +162,61 @@ export const registerClase = async (dispatch, token, newClase) => {
   }
 };
 
+export const getTutorClases = async (dispatch, token) => {
+  dispatch(getTutorStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const res = await userRequest.get(`/tutor/clases`);
+    dispatch(getTutorSuccess(res.data));
+  } catch (err) {
+    dispatch(getTutorFailure());
+  }
+};
+
+export const acceptContratacion = async (dispatch, id, action, token) => {
+  dispatch(acceptContratacionStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const req = { id: id, estado: action };
+    const res = await userRequest.put(`/orders/update`, req);
+    dispatch(acceptContratacionSuccess(res.data));
+  } catch (err) {
+    dispatch(acceptContratacionFailure());
+  }
+};
+
+export const acceptFeedback = async (dispatch, id, token) => {
+  dispatch(acceptFeedbackStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const req = { id: id, estado: "ACEPTADO" };
+    const res = await userRequest.put(`/feedback/accept`, req);
+    dispatch(acceptFeedbackSuccess(res.data));
+  } catch (err) {
+    dispatch(acceptFeedbackFailure());
+  }
+};
+
+export const blockFeedback = async (dispatch, id, msg, token) => {
+  dispatch(blockFeedbackStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const req = { id: id, message: msg };
+    const res = await userRequest.put(`/feedback/block`, req);
+    dispatch(blockFeedbackSuccess(res.data));
+  } catch (err) {
+    dispatch(blockFeedbackFailure());
+  }
+};
