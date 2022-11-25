@@ -1,4 +1,3 @@
-import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -196,7 +195,6 @@ const Product = () => {
 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.products);
@@ -206,11 +204,12 @@ const Product = () => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
 
-
+  
   const usr = useSelector((state)=>state.user.currentUser?  state.user.currentUser.username : "")
   const currentUser = useSelector((state)=>state.user.currentUser)
   const admin = useSelector((state)=>state.user.currentUser? state.user.currentUser.isAdmin : false)
   const comments = useSelector((state)=>state.commentsratings.commentsratings)
+  console.log(useSelector((state)=>state))
   const edtmode = useSelector((state)=>state.commentsratings.editmode)
   const err = useSelector((state)=>state.commentsratings.error)
 
@@ -330,7 +329,8 @@ const Product = () => {
           <ReactStars count={5} size={24} value={totalrating} color2={'#008080'} edit={false}/>
           </div>
           </div>
-          <Desc>Profesor: FALTA VINCULARLO</Desc>
+
+          <Desc>Profesor ID: {product.teacher_id}</Desc>
           <FilterContainer>  
           <Filter>
               <FilterTitle>Tipo</FilterTitle>
@@ -356,31 +356,14 @@ const Product = () => {
             </div>
           </AddContainer>
         </InfoContainer>
+
         <CommentContainer>
           <h2 style={{color:"teal", padding:" "}}>Comentarios</h2>
-          <Duo>
-            <input type="text" style={{border:"none", outline:"0", width:"50%", marginLeft:"2%"}} onChange={(e) => setText(e.target.value)}/>
-            <div style={{width:"50%", display:"flex", justifyContent:"right", alignItems:"center"}}>
-              <ReactStars count={5} size={24} color2={'#008080'} value={rating} onChange={ratingChanged}/>
-              <button style={{ border:"none", backgroundColor:"transparent", color:"teal", padding:"10px", cursor:"pointer", fontWeight:"600"}} onClick={()=>handleClick4()}>Danos tu Opinion</button>
-              {err && <span style={{color:"teal"}}>Campo Vacio !</span>}
-            </div>
-                  
-          </Duo>
-          {edtmode &&
-          <Duo style={{marginTop:"12px"}}>
-            <input type="text" style={{border:"none", outline:"0", width:"65%", marginLeft:"2%"}} onChange={(e) => setText2(e.target.value)}/>
-            <div style={{width:"fit-content", display:"flex", justifyContent:"right", alignItems:"center"}}>
-              <ReactStars count={5} size={24} color2={'#008080'} value={rating2} onChange={ratingChanged2}/>
-              <DoneIcon style={{color:"teal", cursor:"pointer", marginTop:"1px", marginLeft:"3px"}} onClick={()=>handleEdit2(editId, editText, editRating)}/>
-            </div>
-          </Duo>
-          }
           {comments.map((comment)=>(
             <Cwrapper>
               <Duo2>
                 <AccountCircleIcon style={{color:"teal"}}/>
-                <div style={{marginLeft:"5px"}}>{comment.username}</div>
+                <div style={{marginLeft:"5px"}}>{console.log()}</div>
                 <Duo3 id="starscontainer">
                 <span style={{marginTop:"5px", marginRight:"5px"}}>({comment.rating})</span>
                 <ReactStars count={5} size={24} value={comment.rating} color2={'#008080'} edit={false}/>
@@ -391,13 +374,9 @@ const Product = () => {
                 <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.message}</span>
                 {admin ? 
                 <div style={{cursor:"pointer"}} id="iconcontainer">
-                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.message, comment.rating)}/>
-                  <DeleteOutlineIcon style={{color:"red"}} onClick={()=>handleDelete(comment._id)}/>
                 </div>
                 : usr === comment.username ?
                 <div style={{cursor:"pointer"}} id="iconcontainer">
-                  <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.message, comment.rating)}/>
-                  <DeleteOutlineIcon style={{color:"red"}} onClick={()=>handleDelete(comment._id)}/>
                 </div>
                 : <></>
                 }

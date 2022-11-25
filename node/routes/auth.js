@@ -131,27 +131,6 @@ router.put("/updatePassword", async (req, res) => {
 });
 
 
-// updatePrd
-router.put("/updatePrd", async (req, res) => { 
-  try {
-    const updatedClase = await Clase.findByIdAndUpdate(
-      req.body.id,
-      {
-        title: req.body.name,
-        desc: req.body.desc,
-        price: req.body.price,
-        categories: req.body.category,
-        color: req.body.color,
-        size: req.body.size,
-        inStock: req.body.status,  
-      },
-    );
-    res.status(200).json(updatedClase);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 
 //NEWSLETTER
 router.post("/newsletterregister", async (req, res) => {

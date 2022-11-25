@@ -101,7 +101,7 @@ router.post("/contratar", verifyToken, async (req, res) => {
   }
 });
 
-// CREATE CONTRATACION
+// GET CONTRATACION
 
 router.get("/alumno/clases", verifyToken, async (req, res) => {
   req.body.alumnoId = req.user.id;
