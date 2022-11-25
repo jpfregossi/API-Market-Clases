@@ -8,6 +8,9 @@ import Clases from '../components/Clases'
 import Slider from '../components/Slider'
 
 export default function Home() {
+
+
+  
   return (
     <div>
         <Announcement></Announcement>

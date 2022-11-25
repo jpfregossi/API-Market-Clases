@@ -11,7 +11,7 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/register", verifyToken, async (req, res) => {
+router.post("/register", async (req, res) => {
   req.body.teacher_id = req.user.id;
   console.log("teacher_id: ", req.body.teacher_id);
 
@@ -101,9 +101,9 @@ router.post("/contratar", verifyToken, async (req, res) => {
   }
 });
 
-// CREATE CONTRATACION
+// GET CONTRATACION
 
-router.get("/alumno/clases", verifyToken, async (req, res) => {
+router.get("/alumno/clases", async (req, res) => {
   req.body.alumnoId = req.user.id;
 
   const contrataciones = await Contratacion.find({ alumnoId: req.user.id});
