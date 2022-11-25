@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { duration } from '@material-ui/core';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const Container = styled.div`
   width: 100vw;
@@ -102,7 +103,7 @@ const Checks = styled.div`
   margin-bottom: 10px;
 `;
 
-const CourseCard = styled.div `
+const CourseCard = styled.div`
   width: 450px;
   height: 300px;
   background-color: white;
@@ -110,7 +111,7 @@ const CourseCard = styled.div `
   align-text: center;
 `;
 
-const Modal = styled.div `
+const Modal = styled.div`
   top: 0px;
   bottom: 0;
   left: 0;
@@ -124,13 +125,16 @@ const Modal = styled.div `
 `;
 
 export default function NewCourse() {
+  const location = useLocation();
+  const clase = location.state?.clase;
+
   const { isFetching, error, currentUser } = useSelector((state) => state.user);
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [img, setImg] = useState("");
-  const [categories, setCategories] = useState("");
-  const [price, setPrice] = useState("");
-  const [duracion, setDuracion] = useState("");
+  const [title, setTitle] = useState(clase == null ? "" : clase.title);
+  const [desc, setDesc] = useState(clase == null ? "" : clase.desc);
+  const [img, setImg] = useState(clase == null ? "" : clase.img);
+  const [categories, setCategories] = useState(clase == null ? "" : clase.categories[0]);
+  const [price, setPrice] = useState(clase == null ? "" : clase.price);
+  const [duracion, setDuracion] = useState(clase == null ? "" : clase.duracion);
   const [individual, setIndividual] = useState(true);
   const [grupal, setGrupal] = useState(false);
   const [frecUnica, setFrecUnica] = useState(true);
@@ -178,14 +182,14 @@ export default function NewCourse() {
     setCategories(e.target.value);
   };
 
-
+  console.log("CLASE A EDITAR: ", clase);
 
   return (
     <>
       {showModal && (
         <Modal>
           <CourseCard>
-            <div>Nuevo curso registrado.</div>
+            <div>{clase == null ? "Nuevo curso registrado." : "Cambios registrados."}</div>
             <Link to={`/tutor`} style={{ color: "black", textDecoration: "none" }}>
               <Button>Aceptar</Button>
             </Link>
@@ -194,7 +198,7 @@ export default function NewCourse() {
       <Navbar></Navbar>
       <Container>
         <Wrapper>
-          <Title>REGISTRAR UNA NUEVA CLASE</Title>
+          <Title>{clase == null ? "REGISTRAR UNA NUEVA CLASE" : "EDITAR CLASE " + clase.title}</Title>
           <Form onSubmit={handleSubmit}>
             <Label>Título:
               <Input
@@ -288,7 +292,7 @@ export default function NewCourse() {
                 onChange={(e) => setDuracion(e.target.value)} required />
             </Label>
             <Buttons>
-              <Button type="submit" value="Submit" disabled={isFetching}>CREAR</Button>
+              <Button type="submit" value="Submit" disabled={isFetching}>{clase === null ? "CREAR" : "MODIFICAR"}</Button>
               <Link to="/" style={{ width: '50%' }}>
                 <Button type="cancel" value="Cancel" disabled={isFetching}>CANCELAR</Button>
               </Link>

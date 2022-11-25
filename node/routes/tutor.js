@@ -28,11 +28,13 @@ router.get("/clases", verifyToken, async (req, res) => {
           console.log("Contratacion clase_id: " + contratacion.clase_id + " alumno_id: " + contratacion.alumno_id);
           let feedback = feedbacks.find(f => f.user_id.toString() === contratacion.alumno_id.toString());
           console.log("feddback:  ", feedback);
-          let nuevaContratacion = { contratacion, feedback };
+          let { __v, ...contratacionLimpia} = contratacion._doc;
+          let nuevaContratacion = { ...contratacionLimpia, feedback };
           contrataciones.push(nuevaContratacion);
         }
 
-        let nuevaClase = { claseLimpia, ...contrataciones };
+        let nuevaClase = { 
+            ...claseLimpia, contrataciones };
         response.push(JSON.parse(JSON.stringify(nuevaClase)));
       } 
 

@@ -1,5 +1,8 @@
 const Order = require("../models/Order");
+const Clase = require("../models/Clase");
+const Feedback = require("../models/Feedback");
 const Contratacion = require("../models/Contratacion");
+const { getTutorClases } = require("./common");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -15,8 +18,8 @@ router.post("/", verifyToken, async (req, res) => {
 
   try {
     const savedOrder = await newOrder.save();
-   
-    for (const product of req.body.products ) {
+
+    for (const product of req.body.products) {
       console.log("Producto: ", product);
       const newContratacion = new Contratacion({
         alumno_id: req.user.id,
@@ -28,7 +31,7 @@ router.post("/", verifyToken, async (req, res) => {
         horario: product.horario,
         mensaje: product.mensaje,
       });
-      
+
       await newContratacion.save();
     };
 
@@ -39,10 +42,30 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
+//UPDATE CONTRATACION
+router.put("/update", verifyToken, async (req, res) => {
+  if (req.user) {
+    try {
+      const updatedOrder = await Contratacion.findByIdAndUpdate(
+        req.body.id,
+        {
+          estado: req.body.estado,
+        },
+        { new: true }
+      );
 
+      const response = await getTutorClases(req.user.id);
+
+      res.status(200).json(response);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log("Error: ", err);
+    }
+  }
+});
 
 //UPDATE
-router.put("/:id", async (req, res) => { 
+router.put("/:id", async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.body._id,
@@ -78,7 +101,7 @@ router.get("/find/:userId", async (req, res) => {
 
 // //GET ALL
 
-router.get("/",  async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
