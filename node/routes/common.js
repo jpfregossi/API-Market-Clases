@@ -38,12 +38,7 @@ const getTutorClases = async (id) => {
     }
 }
 
-const enviarMail = async function ( tipo, destinatario, motivo){
-    console.log("destinatario: ", destinatario.toString());
-
-    const bodyRechazo = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su comentario fue rechazad0 por no poder ajustarse a los requisitos del profesor.</b></h4><br></br><p>MOTIVO: </p>' + motivo;
-    const bodyCancelacion = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su contratacion fue rechazada por motivos del profesor:</b></h4><br></br><p>MOTIVO: </p>' + motivo;
-    
+const enviar = async function ( destinatario, subject, body){    
     // Definimos el transporter
     var transporter = nodemailer.createTransport({
         secure: true,
@@ -59,10 +54,8 @@ const enviarMail = async function ( tipo, destinatario, motivo){
     var mailOptions = {
         from: 'bottesteador@gmail.com',
         to: destinatario.toString(),
-        subject: 'Comentario rechazado por el profesor',
-        html: (tipo === "RECHAZO") ? bodyRechazo : bodyCancelacion,
-        //html: '<img src="'+imgInscripcion+'" /><a href="'+linkMP+'"><img src="'+imgMP+'" /></a><a href="'+linkPago+'"><img src="'+imgRegistro+'" /></a>',
-        
+        subject: subject,
+        html: body,        
     };
     console.log("mail enviado: ",mailOptions)
     // Enviamos el email
@@ -75,6 +68,36 @@ const enviarMail = async function ( tipo, destinatario, motivo){
     {
         console.log("Error envio mail: ",error);            
     }
+};
+
+const enviarMail = async function ( tipo, destinatario, motivo){
+    console.log("destinatario: ", destinatario.toString());
+
+    const bodyRechazo = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su comentario fue rechazad0 por no poder ajustarse a los requisitos del profesor.</b></h4><br></br><p>MOTIVO: </p>' + motivo;
+    const bodyCancelacion = '<h3><u>IMPORTANTE:</u></h3><p>Tenga en cuenta que este correo electrónico se envía automáticamente desde un buzón automático que <b>NO</b> acepta respuestas.</p><br></br><h4><b>Su contratacion fue rechazada por motivos del profesor:</b></h4><br></br><p>MOTIVO: </p>' + motivo;
+    const bodyForgot= '<h3><u>IMPORTANTE:</u></h3><p>Usted ha solicitado re-establecer su contraseña? </p><p>Ingrese al siguiente link para iniciar el recupero:</p><p>Ingrese al siguiente link para iniciar el recupero:</p><p><a href="' + motivo + '">' + motivo + '</a></p>';
+
+    let body;
+    let subject;
+
+    switch (tipo) {
+        case 'RECHAZO':
+          body = bodyRechazo;
+          subject = "Comentario rechazado por el profesor";
+          break;
+        case 'CANCELACION':
+            body = bodyCancelacion;
+            subject = "Clase cancelada por el profesor";
+          break;
+        case 'FORGOT':
+            body = bodyForgot;
+            subject = "Solicitud de reestablecimiento de contraseña";
+          break;
+        default:
+          console.log('Tipo de solicitud de mail inválido');
+      }
+
+    await enviar(destinatario, subject, body);
 };
 
 module.exports = {

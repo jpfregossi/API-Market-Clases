@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { acceptContratacion, acceptFeedback, blockFeedback } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { deleteClase } from "../redux/apiCalls";
 
 
 const Left = styled.div`
@@ -71,6 +72,7 @@ const Courses = styled.div`
     margin-top: 20px;
     width: 10vw;
     min-width: 150px;
+    cursor: pointer;
 `;
 
 const Payment = styled.img`
@@ -156,7 +158,7 @@ const Modal = styled.div`
 
 const CourseCard = styled.div`
   width: 450px;
-  height: 300px;
+  height: 350px;
   background-color: white;
   border-radius: 10px;
   align-text: center;
@@ -224,6 +226,7 @@ export default function Dashboard({ clases }) {
   const [showDescargo, setShowDescargo] = useState(null);
   const [descargo, setDescargo] = useState(null);
   const currentUser = useSelector((state) => state.user.currentUser)
+  const [vista, setVista] = useState("PENDIENTES");
 
   const history = useNavigate();
 
@@ -239,9 +242,9 @@ export default function Dashboard({ clases }) {
   };
 
   const handleOutsideClick = (e) => {
-    console.log("Clickeó afuera: " + showModal + " | " + showDescargo);
-    if (showModal == null && descargo != null) setShowDescargo(null);
-    setShowModal(null);
+    console.log("Clickeó afuera: ", e);
+    if (showModal == null && e.target.id != "card") {setShowDescargo(null); setDescargo(null);}
+    else if (e.target.id != "card") setShowModal(null);
   };
 
   const handleAcceptClick = (e, action, id) => {
@@ -253,7 +256,13 @@ export default function Dashboard({ clases }) {
   const handleEditarClick = (e, clase) => {
     e.preventDefault();
     console.log("Editar clase: ", clase);
-    history("/tutor/newcourse", {state:{clase: clase,}});
+    history("/tutor/newcourse", { state: { clase: clase, } });
+  };
+
+  const handleEliminarClick = (e, clase) => {
+    e.preventDefault();
+    console.log("Eliminar clase: ", clase);
+    deleteClase(dispatch, currentUser.accessToken, clase._id);
   };
 
   const handleCommentAction = (e, action, id) => {
@@ -273,18 +282,18 @@ export default function Dashboard({ clases }) {
   return (
     <div style={{ display: 'flex' }}>
       {showModal && (
-        <Modal onClick={handleOutsideClick}>
-          <CourseCard>
-            <div>{showModal.title}</div>
-            <div>{showModal.alumno_id}</div>
-            <div>{showModal.tipo}</div>
-            <div>{showModal.frecuencia}</div>
-            <div>{showModal.estado}</div>
-            <div>{showModal.rating}</div>
+        <Modal id="card" onClick={handleOutsideClick}>
+          <CourseCard style={{padding: "10px"}} name="card">
+            <div id="card">{showModal.title}</div>
+            <div id="card">mensaje: {showModal.mensaje}</div>
+            <div id="card">horario: {showModal.horario}</div>
+            <div id="card">contacto: {showModal.contacto}</div>
+            <div id="card">rating: {showModal.feedback?.rating}</div>
+            <div id="card">comentario: {showModal.feedback?.message}</div>
             {(showModal.estado === "SOLICITADA") && (
               <>
-                <Bar><span style={{ flex: 1 }}>Contratación:</span></Bar>
-                <ButtonsContainer>
+                <Bar id="card"><span id="card" style={{ flex: 1 }}>Contratación:</span></Bar>
+                <ButtonsContainer id="card">
                   <Button onClick={(e) => handleAcceptClick(e, "ACEPTADA", showModal._id)}>ACEPTAR</Button>
                   <Button onClick={(e) => handleAcceptClick(e, "CANCELADA", showModal._id)}>RECHAZAR</Button>
                 </ButtonsContainer>
@@ -292,8 +301,8 @@ export default function Dashboard({ clases }) {
             )}
             {(showModal.feedback?.state === "PENDIENTE") && (
               <>
-                <Bar><span style={{ flex: 1 }}>Comentario:</span></Bar>
-                <ButtonsContainer>
+                <Bar id="card"><span id="card" style={{ flex: 1 }}>Comentario:</span></Bar>
+                <ButtonsContainer id="card">
                   <Button onClick={(e) => handleCommentAction(e, "APROBADO", showModal.feedback._id)}>APROBAR</Button>
                   <Button onClick={(e) => handleBloquearClick(e, showModal.feedback._id)}>BLOQUEAR</Button>
                 </ButtonsContainer>
@@ -303,13 +312,13 @@ export default function Dashboard({ clases }) {
         </Modal>
       )}
       {showDescargo && (
-        <Modal onClick={handleOutsideClick}>
-          <CourseCard>
-            <ButtonsContainer>
-              <div>Enviar Descargo</div>
+        <Modal id="card" onClick={handleOutsideClick}>
+          <CourseCard id="card">
+            <ButtonsContainer id="card">
+              <div id="card">Enviar Descargo</div>
             </ButtonsContainer>
-            <ButtonsContainer>
-              <textarea
+            <ButtonsContainer id="card">
+              <textarea id="card"
                 type="textarea"
                 name="textValue"
                 value={descargo}
@@ -317,47 +326,81 @@ export default function Dashboard({ clases }) {
                 onChange={(e) => setDescargo(e.target.value)}
               />
             </ButtonsContainer>
-            <ButtonsContainer>
+            <ButtonsContainer id="card">
+              <Button onClick={(e) => { setDescargo(null); showDescargo(false);}}>CANCELAR</Button>
               <Button onClick={(e) => handleEnviarDescargo(e, showDescargo)}>ACEPTAR</Button>
             </ButtonsContainer>
           </CourseCard>
         </Modal>
       )}
       <Courses>
-        <Course>
-          matematica
+        <Course onClick={() => setVista("PENDIENTES")}>
+          Pendientes
         </Course>
-        <Course>
-          historia
+        <Course onClick={() => setVista("CLASES")}>
+          Clases
         </Course>
-        <Course>
-          ingles
+        <Course onClick={() => setVista("CONTRATADAS")}>
+          Contratadas
         </Course>
-        <Course>
-          musica
+        <Course onClick={() => setVista("FINALIZADAS")}>
+          Finalizadas
         </Course>
-        <Link to={`/tutor/newcourse`} style={{ color: "black", textDecoration: "none" }}>
-          <NuevoCurso>
-            Agregar Curso!
-          </NuevoCurso>
-        </Link>
+        <Course onClick={() => setVista("CANCELADAS")}>
+          Canceladas
+        </Course>
       </Courses>
       <Container>
-        <Bar>
-          <span style={{ flex: 1 }}>Acciones Pendientes</span>
-        </Bar>
-        <Bar>
-          <span style={{ flex: 1 }}>Curso</span>
-          <span style={{ flex: 1 }}>Alumno</span>
-          <span style={{ flex: 1 }}>Tipo</span>
-          <span style={{ flex: 1 }}>Frecuencia</span>
-          <span style={{ flex: 1 }}>Estado</span>
-          <span style={{ flex: 1 }}>Calificación</span>
-          <span style={{ flex: 1 }}>Acciones</span>
-        </Bar>
-        <div>
-          {clases.map((clase) => clase.contrataciones.map((contratacion) => {
-            if (contratacion.estado === "SOLICITADA" || contratacion.feedback?.state === "PENDIENTE") {
+        {vista === "PENDIENTES" && (<>
+          <Bar>
+            <span style={{ flex: 1 }}>Acciones Pendientes</span>
+          </Bar>
+          <Bar>
+            <span style={{ flex: 1 }}>Curso</span>
+            <span style={{ flex: 1 }}>Alumno</span>
+            <span style={{ flex: 1 }}>Tipo</span>
+            <span style={{ flex: 1 }}>Frecuencia</span>
+            <span style={{ flex: 1 }}>Estado</span>
+            <span style={{ flex: 1 }}>Calificación</span>
+            <span style={{ flex: 1 }}>Acciones</span>
+          </Bar>
+          <div>
+            {clases.map((clase) => clase.contrataciones.map((contratacion) => {
+              if (contratacion.estado === "SOLICITADA" || contratacion.feedback?.state === "PENDIENTE") {
+                return (
+                  <>
+                    <hr />
+                    <Bar2>
+                      <span style={{ flex: 1 }}>{clase.title}</span>
+                      <span style={{ flex: 1 }}>{contratacion.alumno_id}</span>
+                      <span style={{ flex: 1 }}>{contratacion.tipo}</span>
+                      <span style={{ flex: 1 }}>{contratacion.frecuencia}</span>
+                      <span style={{ flex: 1 }}>{contratacion.estado}</span>
+                      <span style={{ flex: 1 }}>{contratacion.feedback?.rating}<Tooltip class="tooltiptext">{contratacion.feedback?.message}</Tooltip></span>
+                      <span style={{ flex: 1 }}><input type="button" value="..." onClick={(e) => handleActionsClick(contratacion)} /></span>
+                    </Bar2>
+                  </>
+                )
+              }
+            })
+            )}
+          </div></>)}
+        {vista === "CONTRATADAS" && (<>
+          <Bar>
+            <span style={{ flex: 1 }}>Clases Contratadas</span>
+          </Bar>
+          <Bar>
+            <span style={{ flex: 1 }}>Curso</span>
+            <span style={{ flex: 1 }}>Alumno</span>
+            <span style={{ flex: 1 }}>Tipo</span>
+            <span style={{ flex: 1 }}>Frecuencia</span>
+            <span style={{ flex: 1 }}>Estado</span>
+            <span style={{ flex: 1 }}>Calificación</span>
+            <span style={{ flex: 1 }}>Acciones</span>
+          </Bar>
+          <div>
+            {clases.map((clase) => clase.contrataciones.map((contratacion) => {
+              if (contratacion.estado != "ACEPTADA") return null;
               return (
                 <>
                   <hr />
@@ -372,92 +415,98 @@ export default function Dashboard({ clases }) {
                   </Bar2>
                 </>
               )
+            })
+            )}
+          </div></>)}
+        {vista === "FINALIZADAS" && (<>
+          <Bar>
+            <span style={{ flex: 1 }}>Clases Finalizadas</span>
+          </Bar>
+          <Bar>
+            <span style={{ flex: 1 }}>Curso</span>
+            <span style={{ flex: 1 }}>Alumno</span>
+            <span style={{ flex: 1 }}>Tipo</span>
+            <span style={{ flex: 1 }}>Frecuencia</span>
+            <span style={{ flex: 1 }}>Calificación</span>
+          </Bar>
+          <div>
+            {clases.map((clase) => clase.contrataciones.map((contratacion) => {
+              if (contratacion.estado != "FINALIZADA") return null;
+              return (
+                <>
+                  <hr />
+                  <Bar2>
+                    <span style={{ flex: 1 }}>{clase.title}</span>
+                    <span style={{ flex: 1 }}>{contratacion.alumno_id}</span>
+                    <span style={{ flex: 1 }}>{contratacion.tipo}</span>
+                    <span style={{ flex: 1 }}>{contratacion.frecuencia}</span>
+                    <span style={{ flex: 1 }}>{contratacion.feedback?.rating}<Tooltip class="tooltiptext">{contratacion.feedback?.message}</Tooltip></span>
+                  </Bar2>
+                </>
+              )
+            })
+            )}
+          </div></>)}
+        {vista === "CLASES" && (<>
+          <Bar>
+            <span style={{ flex: 1 }}>Clases Creadas</span>
+          </Bar>
+          <Bar>
+            <span style={{ flex: 1 }}>Curso</span>
+            <span style={{ flex: 1 }}>Acciones</span>
+          </Bar>
+          <div>
+            {clases.map((clase) => {
+              return (
+                <>
+                  <hr />
+                  <Bar2>
+                    <span style={{ flex: 1 }}>{clase.title}</span>
+                    <span style={{ flex: 1 }}>
+                      <input type="button" value="ELIMINAR" onClick={(e) => handleEliminarClick(e, clase)} />
+                      <input type="button" value="EDITAR" onClick={(e) => handleEditarClick(e, clase)} />
+                    </span>
+                  </Bar2>
+                </>
+              )
+            })
             }
-          })
-          )}
-        </div>
-        <Bar>
-          <span style={{ flex: 1 }}>Clases Contratadas</span>
-        </Bar>
-        <Bar>
-          <span style={{ flex: 1 }}>Curso</span>
-          <span style={{ flex: 1 }}>Alumno</span>
-          <span style={{ flex: 1 }}>Tipo</span>
-          <span style={{ flex: 1 }}>Frecuencia</span>
-          <span style={{ flex: 1 }}>Estado</span>
-          <span style={{ flex: 1 }}>Calificación</span>
-          <span style={{ flex: 1 }}>Acciones</span>
-        </Bar>
-        <div>
-          {clases.map((clase) => clase.contrataciones.map((contratacion) => {
-            return (
-              <>
-                <hr />
-                <Bar2>
-                  <span style={{ flex: 1 }}>{clase.title}</span>
-                  <span style={{ flex: 1 }}>{contratacion.alumno_id}</span>
-                  <span style={{ flex: 1 }}>{contratacion.tipo}</span>
-                  <span style={{ flex: 1 }}>{contratacion.frecuencia}</span>
-                  <span style={{ flex: 1 }}>{contratacion.estado}</span>
-                  <span style={{ flex: 1 }}>{contratacion.feedback?.rating}<Tooltip class="tooltiptext">{contratacion.feedback?.message}</Tooltip></span>
-                  <span style={{ flex: 1 }}><input type="button" value="..." onClick={(e) => handleActionsClick(contratacion)} /></span>
-                </Bar2>
-              </>
-            )
-          })
-          )}
-        </div>
-        <Bar>
-          <span style={{ flex: 1 }}>Clases Finalizadas</span>
-        </Bar>
-        <Bar>
-          <span style={{ flex: 1 }}>Curso</span>
-          <span style={{ flex: 1 }}>Alumno</span>
-          <span style={{ flex: 1 }}>Tipo</span>
-          <span style={{ flex: 1 }}>Frecuencia</span>
-          <span style={{ flex: 1 }}>Calificación</span>
-        </Bar>
-        <div>
-          {clases.map((clase) => clase.contrataciones.map((contratacion) => {
-            return (
-              <>
-                <hr />
-                <Bar2>
-                  <span style={{ flex: 1 }}>{clase.title}</span>
-                  <span style={{ flex: 1 }}>{contratacion.alumno_id}</span>
-                  <span style={{ flex: 1 }}>{contratacion.tipo}</span>
-                  <span style={{ flex: 1 }}>{contratacion.frecuencia}</span>
-                  <span style={{ flex: 1 }}>{contratacion.feedback?.rating}<Tooltip class="tooltiptext">{contratacion.feedback?.message}</Tooltip></span>
-                </Bar2>
-              </>
-            )
-          })
-          )}
-        </div>
-        <Bar>
-          <span style={{ flex: 1 }}>Clases Creadas</span>
-        </Bar>
-        <Bar>
-          <span style={{ flex: 1 }}>Curso</span>
-          <span style={{ flex: 1 }}>Acciones</span>
-        </Bar>
-        <div>
-          {clases.map((clase) => {
-            return (
-              <>
-                <hr />
-                <Bar2>
-                  <span style={{ flex: 1 }}>{clase.title}</span>
-                  <span style={{ flex: 1 }}>
-                    <input type="button" value="ELIMINAR" onClick={(e) => handleEditarClick(e, clase)} />
-                    <input type="button" value="EDITAR" onClick={(e) => handleEditarClick(e, clase)} />
-                  </span>
-                </Bar2>
-              </>
-            )
-          })
-          }
-        </div>
+          </div>
+          <Link to={`/tutor/newcourse`} style={{ color: "black", textDecoration: "none" }}>
+            <NuevoCurso>
+              Agregar Curso!
+            </NuevoCurso>
+          </Link>
+        </>)}
+        {vista === "CANCELADAS" && (<>
+          <Bar>
+            <span style={{ flex: 1 }}>Clases Canceladas</span>
+          </Bar>
+          <Bar>
+            <span style={{ flex: 1 }}>Curso</span>
+            <span style={{ flex: 1 }}>Alumno</span>
+            <span style={{ flex: 1 }}>Tipo</span>
+            <span style={{ flex: 1 }}>Frecuencia</span>
+            <span style={{ flex: 1 }}>Calificación</span>
+          </Bar>
+          <div>
+            {clases.map((clase) => clase.contrataciones.map((contratacion) => {
+              if (contratacion.estado != "CANCELADA") return null;
+              return (
+                <>
+                  <hr />
+                  <Bar2>
+                    <span style={{ flex: 1 }}>{clase.title}</span>
+                    <span style={{ flex: 1 }}>{contratacion.alumno_id}</span>
+                    <span style={{ flex: 1 }}>{contratacion.tipo}</span>
+                    <span style={{ flex: 1 }}>{contratacion.frecuencia}</span>
+                    <span style={{ flex: 1 }}>{contratacion.feedback?.rating}<Tooltip class="tooltiptext">{contratacion.feedback?.message}</Tooltip></span>
+                  </Bar2>
+                </>
+              )
+            })
+            )}
+          </div></>)}
       </Container>
     </div>
   )

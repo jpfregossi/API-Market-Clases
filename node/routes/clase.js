@@ -1,6 +1,7 @@
 const { Mongoose } = require("mongoose");
 const Clase = require("../models/Clase");
 const Contratacion = require("../models/Contratacion");
+const { getTutorClases } = require("./common");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -19,14 +20,15 @@ router.post("/register", verifyToken, async (req, res) => {
 
   try {
     const savedClase = await newClase.save();
-    res.status(200).json(savedClase);
+    const response = await getTutorClases(req.user.id);
+    res.status(200).json(response);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
   try {
     const updatedClase = await Clase.findByIdAndUpdate(
       req.params.id,
@@ -35,17 +37,20 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).json(updatedClase);
+
+    const response = await getTutorClases(req.user.id);
+    res.status(200).json(response);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Clase.findByIdAndDelete(req.params.id);
-    res.status(200).json("Clase has been deleted...");
+    const response = await getTutorClases(req.user.id);
+    res.status(200).json(response);
   } catch (err) {
     res.status(500).json(err);
   }
