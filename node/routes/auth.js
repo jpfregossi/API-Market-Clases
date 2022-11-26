@@ -4,6 +4,8 @@ const Clase = require("../models/Clase")
 const Newsletter = require("../models/Newsletter");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const { generateRecoveryLink } = require("./verifyToken");
+const { enviarMail } = require("./common");
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -31,6 +33,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
+
     !user && res.status(401).json("Wrong credentials!");
 
     const hashedPassword = CryptoJS.AES.decrypt(
@@ -48,12 +51,12 @@ router.post("/login", async (req, res) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SEC,
-      {expiresIn:"3d"}
+      { expiresIn: "3d" }
     );
 
     const { password, ...others } = user._doc;
 
-    res.status(200).json({...others, accessToken});
+    res.status(200).json({ ...others, accessToken });
   } catch (err) {
     res.status(500).json();
   }
@@ -72,7 +75,7 @@ router.post("/checkpassword", async (req, res) => {
     );
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    if ( OriginalPassword == req.body.currentPassword ) {
+    if (OriginalPassword == req.body.currentPassword) {
 
       res.status(200).json(true)
     } else { res.status(200).json(false) }
@@ -84,7 +87,7 @@ router.post("/checkpassword", async (req, res) => {
 
 
 // updateUsername
-router.put("/updateUsername", async (req, res) => { 
+router.put("/updateUsername", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.body.id,
@@ -97,8 +100,9 @@ router.put("/updateUsername", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // updateEmail
-router.put("/updateEmail", async (req, res) => { 
+router.put("/updateEmail", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.body.id,
@@ -112,7 +116,7 @@ router.put("/updateEmail", async (req, res) => {
   }
 });
 // updatePassword
-router.put("/updatePassword", async (req, res) => { 
+router.put("/updatePassword", async (req, res) => {
   try {
     const encryptedPassword = CryptoJS.AES.encrypt(
       req.body.password,
@@ -145,6 +149,79 @@ router.post("/newsletterregister", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//FORGOT PASSWORD
+router.post("/forgot-password", async (req, res) => {
+  const email = req.body.email;
+
+  try {
+    const oldUser = await User.findOne({ email: email });
+    if (!oldUser) {
+      return res.json({ status: "User Not Exists!!" });
+    }
+
+    const link = generateRecoveryLink(oldUser._id, email, oldUser.password);
+
+    await enviarMail("FORGOT", email, link);
+
+    console.log("link: ", link);
+
+    res.status(200).json({ status: "OK", link: link });
+  } catch (err) {
+    res.status(500).json(err);
+    console.log("Error: ", err);
+  }
+});
+
+//RECOVER PASSWORD
+router.post("/reset-password", async (req, res) => {
+  const { id, token, password } = req.body;
+
+  const oldUser = await User.findById(id);
+  if (!oldUser) {
+    return res.json({ status: "User Not Exists!!" });
+  }
+  
+  const secret = process.env.JWT_SEC + oldUser.password;
+  try {
+    const verify = jwt.verify(token, secret);
+
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      password,
+      process.env.PASS_SEC
+    ).toString()
+
+    await User.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          password: encryptedPassword,
+        },
+      }
+    );
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.body.id,
+      {
+        password: encryptedPassword,
+      },
+      { new: true }
+    );
+
+    let cleanUser = updatedUser._doc;
+    delete cleanUser.password;
+    delete cleanUser.__v;
+    delete cleanUser.isAdmin;
+
+    res.status(200).json(cleanUser);
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "Something Went Wrong" });
+  }
+});
+
 
 
 module.exports = router;

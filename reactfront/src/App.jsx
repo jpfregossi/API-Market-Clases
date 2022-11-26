@@ -11,6 +11,7 @@ import Orders from "./pages/Orders";
 import NwSuccess from "./pages/NwSuccess";
 import Tutor from "./pages/Tutor";
 import NewCourse from './pages/NewCourse';
+import PasswordReset from './pages/PasswordReset';
 
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -18,7 +19,7 @@ import { useSelector } from 'react-redux';
 
 
 function App() {
-  const user = useSelector(state=>state.user.currentUser)
+  const user = useSelector(state=>state.user.currentUser);
   const confirmedPass = useSelector((state) => state.user.confirmedPassword);
 
   console.log("Usuario: ", user);
@@ -39,6 +40,8 @@ function App() {
         <Route path="/newsletterregister" element={user? <NwSuccess /> : <Login/> }></Route>
         <Route path="/tutor" element={user && user.role === "profesor" ? <Tutor /> : <Login/> }></Route>
         <Route path="/tutor/newcourse" element={user && user.role === "profesor" ? <NewCourse /> : <Login/> }></Route>
+        <Route path="/reset-password/:id/:token" element={<PasswordReset />}></Route>
+        <Route path="/reset-password" element={<PasswordReset />}></Route>
       </Routes>
      </Router>
   );

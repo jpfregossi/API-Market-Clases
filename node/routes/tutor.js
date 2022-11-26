@@ -33,10 +33,9 @@ router.get("/clases", verifyToken, async (req, res) => {
           contrataciones.push(nuevaContratacion);
         }
 
-        let nuevaClase = { 
-            ...claseLimpia, contrataciones };
+        let nuevaClase = { ...claseLimpia, contrataciones };
         response.push(JSON.parse(JSON.stringify(nuevaClase)));
-      } 
+      }
 
       res.status(200).json(response);
     } catch (err) {

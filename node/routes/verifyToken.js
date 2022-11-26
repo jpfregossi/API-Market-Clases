@@ -37,8 +37,19 @@ const verifyTokenAndAdmin = (req, res, next) => {
   });
 };
 
+const generateRecoveryLink = (id, email, pwd) => {
+  const secret = process.env.JWT_SEC + pwd;
+  const token = jwt.sign({ email: email, id: id }, secret, {
+    expiresIn: "5m",
+  });
+  const link = `http://localhost:3000/reset-password/${id}/${token}`;
+
+  return link;
+};
+
 module.exports = {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
+  generateRecoveryLink
 };
