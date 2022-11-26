@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "7a56155a-36e9-4502-83e3-7da6e2cd14e7",
+		"name": "TPO_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Alumno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"userPrueba2\",\n    \"password\": \"userPrueba2\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Solicitud Recupero Contraseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jpfregossi@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reseteo de Contraseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"6334db9f6da3ce70cb69a12d\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpwZnJlZ29zc2lAZ21haWwuY29tIiwiaWQiOiI2MzM0ZGI5ZjZkYTNjZTcwY2I2OWExMmQiLCJpYXQiOjE2Njk0NTkxNDgsImV4cCI6MTY2OTQ1OTQ0OH0.1JQkW3xpiGc7aJRiPIJvc7bdPONGkkbT4aLjLS1EtbA\",\n    \"password\": \"userPrueba2\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/reset-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Tutor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jpfregossi\",\n    \"password\": \"jpfregossi\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Clase",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkwNjQ4MzYsImV4cCI6MTY2OTMyNDAzNn0.JTQ5BVDlO5ccY34syEe3Z4HVp9s_efI0S9eeisxZZWc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"clase de ingles 3\",\n    \"desc\": \"para universidad\",\n    \"img\": \"https://www.wallstreetenglish.com.ar/hs-fs/hubfs/2019%20Content/Blog%20Posts/mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png?width=1206&name=mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png\",\n    \"categories\": [\"ingles\"],\n    \"tipo\": [\"individual\"],\n    \"frecuencia\": [\"unica\"],\n    \"price\": 110,\n    \"duracion\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/clases/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"clases",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Clase",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkwNjQ4MzYsImV4cCI6MTY2OTMyNDAzNn0.JTQ5BVDlO5ccY34syEe3Z4HVp9s_efI0S9eeisxZZWc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"clase de ingles 3\",\n    \"desc\": \"para universidad\",\n    \"img\": \"https://www.wallstreetenglish.com.ar/hs-fs/hubfs/2019%20Content/Blog%20Posts/mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png?width=1206&name=mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png\",\n    \"categories\": [\"ingles\"],\n    \"tipo\": [\"individual\"],\n    \"frecuencia\": [\"unica\"],\n    \"price\": 110,\n    \"duracion\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/clases/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"clases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "id_de_la_clase"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Clase",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkwNjQ4MzYsImV4cCI6MTY2OTMyNDAzNn0.JTQ5BVDlO5ccY34syEe3Z4HVp9s_efI0S9eeisxZZWc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"clase de ingles 3\",\n    \"desc\": \"para universidad\",\n    \"img\": \"https://www.wallstreetenglish.com.ar/hs-fs/hubfs/2019%20Content/Blog%20Posts/mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png?width=1206&name=mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png\",\n    \"categories\": [\"ingles\"],\n    \"tipo\": [\"individual\"],\n    \"frecuencia\": [\"unica\"],\n    \"price\": 110,\n    \"duracion\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/clases/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"clases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "id_de_la_clase"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Orden y Contratacion",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkxNTY2MDcsImV4cCI6MTY2OTQxNTgwN30.Q603DuPtEyiLDdz77CJf47aSY0tg-ky_qOUOPOLDzY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"6334db9f6da3ce70cb69a12d\",\n    \"products\": [\n        {\n            \"clase_id\": \"637bece0dd3e13f5e62d318e\",\n            \"teacher_id\": \"632e520477327a248d71e152\",\n            \"tipo\": \"grupal\",\n            \"frecuencia\": \"mensual\",\n            \"contacto\": \"11111111111\",\n            \"horario\": \"8 PM\",\n            \"mensaje\": \"No puedo ningún otro horario.\"\n        }\n    ],\n    \"amount\": 120,\n    \"address\": {\n        \"city\": \"caba\",\n        \"country\": \"Argentina\",\n        \"line1\": \"asddsa\",\n        \"line2\": null,\n        \"postal_code\": \"122\",\n        \"state\": null\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/clases/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"clases",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Feedback",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkxNTY2MDcsImV4cCI6MTY2OTQxNTgwN30.Q603DuPtEyiLDdz77CJf47aSY0tg-ky_qOUOPOLDzY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\n    \"rating\": 3.3,\n    \"message\": \"hola, la verdad que todo mal\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/feedback",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"feedback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceptar Contratacion",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"637eb0bbb52ef2082a9de599\",\n    \"estado\": \"SOLICITADA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/orders/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"orders",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aceptar Feedback",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"637e97be8af963e473f76ae2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/feedback/accept",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"feedback",
+						"accept"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block Feedback",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"637e97be8af963e473f76ae2\",\n    \"message\": \"Miente, nunca apareció\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/feedback/block",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"feedback",
+						"block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Clases",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/clases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"clases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tutor Data",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authentication",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/tutor/clases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"tutor",
+						"clases"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
