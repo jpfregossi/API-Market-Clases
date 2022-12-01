@@ -1,0 +1,2169 @@
+{
+	"info": {
+		"_postman_id": "3a6396ad-17b2-4fa7-a784-4fdb595fd166",
+		"name": "API-Market-Clases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24611229"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"nico\",\r\n \"password\": \"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "userna",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"username\": \"nico\",\r\n \"password\": \"123456\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									],
+									"query": [
+										{
+											"key": "userna",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "490"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ea-bJh8WANVLkvNPHpqtFzLSJQHo0U\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:55:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"632df6fa6857a78a1c5478f2\",\n    \"username\": \"nico\",\n    \"email\": \"nmenendez2529@gmail.com\",\n    \"isAdmin\": false,\n    \"createdAt\": \"2022-09-23T18:12:10.660Z\",\n    \"updatedAt\": \"2022-09-23T18:12:10.660Z\",\n    \"__v\": 0,\n    \"role\": \"alumno\",\n    \"birthDate\": \"1992-10-29T02:00:00.000Z\",\n    \"studies\": \"Universitarios - en curso\",\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmRmNmZhNjg1N2E3OGExYzU0NzhmMiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzODQ1MTgsImV4cCI6MTY2OTY0MzcxOH0.kWQi8lkCA8nlAe0_6JbOdj2bzhsIVRx6n6tsSn0a1zM\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Checkpassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"632df6fa6857a78a1c5478f2\",\r\n    \"currentPassword\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/checkpassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"checkpassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Checkpassword",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"632df6fa6857a78a1c5478f2\",\r\n    \"currentPassword\" : \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/checkpassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"checkpassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-X/5TO4MPCKAyY0ipFgr6/IraRNs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:55:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\"name\": \"nico\",\r\n\"lastname\" : \"menendez\" ,\r\n\"username\" : \"nico3\" ,\r\n\"email\" : \"nico@mail.com\" ,\r\n\"password\" : \"123456\",\r\n\"role\": \"alumno\",\r\n\"birthDate\" : \"10-10-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n\"name\": \"nico\",\r\n\"lastname\" : \"menendez\" ,\r\n\"username\" : \"nico3\" ,\r\n\"email\" : \"nico@mail.com\" ,\r\n\"password\" : \"123456\",\r\n\"role\": \"alumno\",\r\n\"birthDate\" : \"10-10-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-4NYlYuTji5rmstYSHsHFFd7MBII\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:54:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"index\": 0,\n    \"code\": 11000,\n    \"keyPattern\": {\n        \"username\": 1\n    },\n    \"keyValue\": {\n        \"username\": \"nico3\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Newsletterregister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\"email\" : \"nico@mail.com\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/newsletterregister",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"newsletterregister"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Newsletterregister",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n\"email\" : \"nico@mail.com\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/newsletterregister",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"newsletterregister"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42-YMjdpbxpGgHiiT6s9AbKj/j4QYI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:06:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"nico@mail.com\",\n    \"_id\": \"6380cbfcf1efe4b02688e38e\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "updateUsername",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"nico\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/updateUsername",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"updateUsername"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "updateUsername",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"nico\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/updateUsername",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"updateUsername"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:51:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "null"
+						}
+					]
+				},
+				{
+					"name": "updateEmail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nico@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/updateEmail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"updateEmail"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "updateEmail",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nico@mail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/updateEmail",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"updateEmail"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:53:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "null"
+						}
+					]
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/updatePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"updatePassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "updatePassword",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/updatePassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"updatePassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 13:57:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "null"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "CreateCart",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmRmNmZhNjg1N2E3OGExYzU0NzhmMiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njk0MDM2MzMsImV4cCI6MTY2OTY2MjgzM30.FfSIX0IH-jVU1zKx7UN3w6vizocwFP5Y--OZk3ahI1k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"632df6fa6857a78a1c5478f2\",\r\n    \"clases\" : [{\"claseId\" : \"637bec2ddd3e13f5e62d318c\"},{\"quantity\" : \"1\"}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/carts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carts",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateCart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\" : \"632df6fa6857a78a1c5478f2\",\r\n    \"clases\" : [{\"claseId\" : \"637bec2ddd3e13f5e62d318c\"},{\"quantity\" : \"1\"}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/carts/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"carts",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "300"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12c-2HmJB2sf24eaHM2M6BKkgo0qZdM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:33:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": \"632df6fa6857a78a1c5478f2\",\n    \"clases\": [\n        {\n            \"claseId\": \"637bec2ddd3e13f5e62d318c\",\n            \"quantity\": 1,\n            \"_id\": \"6380d22bf2b6b714bb44da55\"\n        },\n        {\n            \"quantity\": 1,\n            \"_id\": \"6380d22bf2b6b714bb44da56\"\n        }\n    ],\n    \"_id\": \"6380d22bf2b6b714bb44da54\",\n    \"createdAt\": \"2022-11-25T14:33:15.276Z\",\n    \"updatedAt\": \"2022-11-25T14:33:15.276Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateCart",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmRmNmZhNjg1N2E3OGExYzU0NzhmMiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njk0MDM2MzMsImV4cCI6MTY2OTY2MjgzM30.FfSIX0IH-jVU1zKx7UN3w6vizocwFP5Y--OZk3ahI1k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carts/6380d22bf2b6b714bb44da54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carts",
+								"6380d22bf2b6b714bb44da54"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateCart",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/carts/6380d22bf2b6b714bb44da54",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"carts",
+										"6380d22bf2b6b714bb44da54"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "300"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12c-PlES6LrUQMX1omiFF9L7OftIxGo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:38:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6380d22bf2b6b714bb44da54\",\n    \"userId\": \"632df6fa6857a78a1c5478f2\",\n    \"clases\": [\n        {\n            \"claseId\": \"637bec2ddd3e13f5e62d318c\",\n            \"quantity\": 1,\n            \"_id\": \"6380d22bf2b6b714bb44da55\"\n        },\n        {\n            \"quantity\": 1,\n            \"_id\": \"6380d22bf2b6b714bb44da56\"\n        }\n    ],\n    \"createdAt\": \"2022-11-25T14:33:15.276Z\",\n    \"updatedAt\": \"2022-11-25T14:38:12.960Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteCart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carts/6380d22bf2b6b714bb44da54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carts",
+								"6380d22bf2b6b714bb44da54"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DeleteCart",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/carts/6380d22bf2b6b714bb44da54",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"carts",
+										"6380d22bf2b6b714bb44da54"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-NdlcxR4Ay6S+KU1Bv6cV+VqQY8o\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:39:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"Cart has been deleted...\""
+						}
+					]
+				},
+				{
+					"name": "GetUserCart",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmRmNmZhNjg1N2E3OGExYzU0NzhmMiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njk0MDM2MzMsImV4cCI6MTY2OTY2MjgzM30.FfSIX0IH-jVU1zKx7UN3w6vizocwFP5Y--OZk3ahI1k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carts/find/632df6fa6857a78a1c5478f2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carts",
+								"find",
+								"632df6fa6857a78a1c5478f2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetUserCart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/carts/find/632df6fa6857a78a1c5478f2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"carts",
+										"find",
+										"632df6fa6857a78a1c5478f2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "300"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12c-z+npDQFL5GvC+kF4EsTfa6Gn7V8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:43:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6380d43530f3151a7389f5e8\",\n    \"userId\": \"632df6fa6857a78a1c5478f2\",\n    \"clases\": [\n        {\n            \"claseId\": \"637bec2ddd3e13f5e62d318c\",\n            \"quantity\": 1,\n            \"_id\": \"6380d43530f3151a7389f5e9\"\n        },\n        {\n            \"quantity\": 1,\n            \"_id\": \"6380d43530f3151a7389f5ea\"\n        }\n    ],\n    \"createdAt\": \"2022-11-25T14:41:57.089Z\",\n    \"updatedAt\": \"2022-11-25T14:41:57.089Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Clase",
+			"item": [
+				{
+					"name": "CreateClase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacher_id\": \"632e520477327a248d71e152\",\r\n    \"title\": \"clase de ingles 2\",\r\n    \"desc\": \"refuerzo para primaria\",\r\n    \"img\": \"https://i.imgur.com/RomlYIo.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clases/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateClase",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"teacher_id\": \"632e520477327a248d71e152\",\r\n    \"title\": \"clase de ingles 2\",\r\n    \"desc\": \"refuerzo para primaria\",\r\n    \"img\": \"https://i.imgur.com/RomlYIo.png\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clases/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clases",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "317"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13d-n5CezG2tm03huSB2mFCSCt3qvIU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 14:59:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"teacher_id\": \"632e520477327a248d71e152\",\n    \"title\": \"clase de ingles 2\",\n    \"desc\": \"refuerzo para primaria\",\n    \"img\": \"https://i.imgur.com/RomlYIo.png\",\n    \"categories\": [],\n    \"tipo\": [],\n    \"frecuencia\": [],\n    \"inStock\": true,\n    \"_id\": \"6380d86c139f60f302b03876\",\n    \"createdAt\": \"2022-11-25T14:59:56.372Z\",\n    \"updatedAt\": \"2022-11-25T14:59:56.372Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateClase",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/clases/6380d86c139f60f302b03876",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"6380d86c139f60f302b03876"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateClase",
+							"originalRequest": {
+								"method": "PUT",
+								"header": []
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "317"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13d-yDCDdQu89l7UK0lTorKJbiZcLrY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 15:02:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6380d86c139f60f302b03876\",\n    \"teacher_id\": \"632e520477327a248d71e152\",\n    \"title\": \"clase de ingles 2\",\n    \"desc\": \"refuerzo para primaria\",\n    \"img\": \"https://i.imgur.com/RomlYIo.png\",\n    \"categories\": [],\n    \"tipo\": [],\n    \"frecuencia\": [],\n    \"inStock\": true,\n    \"createdAt\": \"2022-11-25T14:59:56.372Z\",\n    \"updatedAt\": \"2022-11-25T15:02:23.755Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "GetClase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/clases/find/6380d86c139f60f302b03876",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"find",
+								"6380d86c139f60f302b03876"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetClase",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clases/find/6380d86c139f60f302b03876",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clases",
+										"find",
+										"6380d86c139f60f302b03876"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "317"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13d-yDCDdQu89l7UK0lTorKJbiZcLrY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 15:05:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6380d86c139f60f302b03876\",\n    \"teacher_id\": \"632e520477327a248d71e152\",\n    \"title\": \"clase de ingles 2\",\n    \"desc\": \"refuerzo para primaria\",\n    \"img\": \"https://i.imgur.com/RomlYIo.png\",\n    \"categories\": [],\n    \"tipo\": [],\n    \"frecuencia\": [],\n    \"inStock\": true,\n    \"createdAt\": \"2022-11-25T14:59:56.372Z\",\n    \"updatedAt\": \"2022-11-25T15:02:23.755Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateContratacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clase_id\": \"637bece0dd3e13f5e62d318e\",\r\n    \"teacher_id\": \"632e520477327a248d71e152\",\r\n    \"alumno_id\": \"6334db9f6da3ce70cb69a12d\",\r\n    \"tipo\": \"grupal\", \r\n    \"frecuencia\": \"mensual\",\r\n    \"horario\": \"8 PM\",\r\n    \"contacto\": \"1111111111\",\r\n    \"estado\": \"SOLICITADA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clases/contratar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"contratar"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateContratacion",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"clase_id\": \"637bece0dd3e13f5e62d318e\",\r\n    \"teacher_id\": \"632e520477327a248d71e152\",\r\n    \"alumno_id\": \"6334db9f6da3ce70cb69a12d\",\r\n    \"tipo\": \"grupal\", \r\n    \"frecuencia\": \"mensual\",\r\n    \"horario\": \"8 PM\",\r\n    \"contacto\": \"1111111111\",\r\n    \"estado\": \"SOLICITADA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clases/contratar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clases",
+										"contratar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "337"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"151-AaFMoj6CHGOTTESUmHSk6nYTJ18\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 15:12:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"clase_id\": \"637bece0dd3e13f5e62d318e\",\n    \"teacher_id\": \"632e520477327a248d71e152\",\n    \"alumno_id\": \"6334db9f6da3ce70cb69a12d\",\n    \"tipo\": \"grupal\",\n    \"frecuencia\": \"mensual\",\n    \"horario\": \"8 PM\",\n    \"contacto\": 1111111111,\n    \"estado\": \"SOLICITADA\",\n    \"_id\": \"6380db4ce10bca8df4e576c5\",\n    \"createdAt\": \"2022-11-25T15:12:12.369Z\",\n    \"updatedAt\": \"2022-11-25T15:12:12.369Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteClase",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/clases/6380d86c139f60f302b03876",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"6380d86c139f60f302b03876"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DeleteClase",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clases/6380d86c139f60f302b03876",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clases",
+										"6380d86c139f60f302b03876"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-lmqn1kU2h3SXAcEX2eX5vrGzE8w\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 15:30:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"Clase has been deleted...\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ServicioNotificacion",
+			"item": [
+				{
+					"name": "EnviarMailRechazo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"destinatario\": \"nmenendez2529@gmail.com\",\r\n  \"motivo\": \"Los horarios solicitados ya estan ocupados\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/sendMail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"sendMail"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments/Feedback",
+			"item": [
+				{
+					"name": "Post Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"user_id\": \"632df6fa6857a78a1c5478f2\",\r\n    \"username\": \"nico\",\r\n    \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\r\n    \"rating\": 5,\r\n    \"message\": \"bla bla bla\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/feedback/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"feedback",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "GetOrders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmRmNmZhNjg1N2E3OGExYzU0NzhmMiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njk3NDc3OTAsImV4cCI6MTY3MDAwNjk5MH0.ZLf6--MNuEkPEjZiChf-hguHmgZpI61FFOVe7GPWEQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/orders/find",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"find"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetOrders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/orders/find",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"orders",
+										"find"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2196"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"894-HBN/oAuEh8kB5ig0CdRFRAQp4mc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 Dec 2022 22:39:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"63891e70dd06ebbfa8e217f4\",\n        \"userId\": \"632df6fa6857a78a1c5478f2\",\n        \"products\": [\n            {\n                \"quantity\": 1,\n                \"_id\": \"63891e70dd06ebbfa8e217f5\"\n            }\n        ],\n        \"amount\": 184,\n        \"address\": {\n            \"city\": \"Tristan Suarez\",\n            \"country\": \"Argentina\",\n            \"line1\": \"Thompson 295\",\n            \"line2\": null,\n            \"postal_code\": \"1806\",\n            \"state\": \"B\"\n        },\n        \"status\": \"pending\",\n        \"createdAt\": \"2022-12-01T21:36:48.516Z\",\n        \"updatedAt\": \"2022-12-01T21:36:48.615Z\",\n        \"contratacion_id\": \"63891e70dd06ebbfa8e217f7\",\n        \"contrataciones\": [\n            {\n                \"_id\": \"63891e70dd06ebbfa8e217f7\",\n                \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\n                \"teacher_id\": \"632e520477327a248d71e152\",\n                \"alumno_id\": \"632df6fa6857a78a1c5478f2\",\n                \"order_id\": \"63891e70dd06ebbfa8e217f4\",\n                \"tipo\": \"individual\",\n                \"frecuencia\": \"semanal\",\n                \"horario\": \"10\",\n                \"contacto\": 123456,\n                \"estado\": \"ACEPTADA\",\n                \"mensaje\": \"wrfds\",\n                \"createdAt\": \"2022-12-01T21:36:48.566Z\",\n                \"updatedAt\": \"2022-12-01T21:40:36.802Z\",\n                \"feedback\": {\n                    \"_id\": \"63891f82dd06ebbfa8e21840\",\n                    \"user_id\": \"632df6fa6857a78a1c5478f2\",\n                    \"username\": \"nico\",\n                    \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\n                    \"rating\": 3,\n                    \"message\": \"hola que tal\",\n                    \"state\": \"PENDIENTE\",\n                    \"createdAt\": \"2022-12-01T21:41:22.318Z\",\n                    \"updatedAt\": \"2022-12-01T21:41:22.318Z\",\n                    \"__v\": 0\n                }\n            }\n        ]\n    },\n    {\n        \"_id\": \"6389264d9d86802f0f3b9767\",\n        \"userId\": \"632df6fa6857a78a1c5478f2\",\n        \"products\": [\n            {\n                \"quantity\": 1,\n                \"_id\": \"6389264d9d86802f0f3b9768\"\n            }\n        ],\n        \"amount\": 120,\n        \"address\": {\n            \"city\": \"Tristan Suarez\",\n            \"country\": \"Argentina\",\n            \"line1\": \"Thompson 295\",\n            \"line2\": null,\n            \"postal_code\": \"1806\",\n            \"state\": \"B\"\n        },\n        \"status\": \"pending\",\n        \"createdAt\": \"2022-12-01T22:10:21.197Z\",\n        \"updatedAt\": \"2022-12-01T22:10:21.291Z\",\n        \"contratacion_id\": \"6389264d9d86802f0f3b976a\",\n        \"contrataciones\": [\n            {\n                \"_id\": \"6389264d9d86802f0f3b976a\",\n                \"clase_id\": \"637bece0dd3e13f5e62d318e\",\n                \"teacher_id\": \"632e520477327a248d71e152\",\n                \"alumno_id\": \"632df6fa6857a78a1c5478f2\",\n                \"order_id\": \"6389264d9d86802f0f3b9767\",\n                \"tipo\": \"individual\",\n                \"frecuencia\": \"unica\",\n                \"horario\": \"11\",\n                \"contacto\": 132456,\n                \"estado\": \"SOLICITADA\",\n                \"mensaje\": \"sdfsdfsd\",\n                \"createdAt\": \"2022-12-01T22:10:21.246Z\",\n                \"updatedAt\": \"2022-12-01T22:10:21.246Z\",\n                \"feedback\": {\n                    \"_id\": \"63891f82dd06ebbfa8e21840\",\n                    \"user_id\": \"632df6fa6857a78a1c5478f2\",\n                    \"username\": \"nico\",\n                    \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\n                    \"rating\": 3,\n                    \"message\": \"hola que tal\",\n                    \"state\": \"PENDIENTE\",\n                    \"createdAt\": \"2022-12-01T21:41:22.318Z\",\n                    \"updatedAt\": \"2022-12-01T21:41:22.318Z\",\n                    \"__v\": 0\n                }\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "PostOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/orders/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JP Pegadas",
+			"item": [
+				{
+					"name": "Login Alumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"nico\",\n    \"password\": \"123456\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Tutor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"jpfregossi\",\n    \"password\": \"jpfregossi\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Clase",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkwNjQ4MzYsImV4cCI6MTY2OTMyNDAzNn0.JTQ5BVDlO5ccY34syEe3Z4HVp9s_efI0S9eeisxZZWc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"clase de ingles 3\",\n    \"desc\": \"para universidad\",\n    \"img\": \"https://www.wallstreetenglish.com.ar/hs-fs/hubfs/2019%20Content/Blog%20Posts/mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png?width=1206&name=mujer-joven-con-laptop-para-aprender-ingl%C3%A9s.png\",\n    \"categories\": [\"ingles\"],\n    \"tipo\": [\"individual\"],\n    \"frecuencia\": [\"unica\"],\n    \"price\": 110,\n    \"duracion\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clases/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Orden y Contratacion",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkxNTY2MDcsImV4cCI6MTY2OTQxNTgwN30.Q603DuPtEyiLDdz77CJf47aSY0tg-ky_qOUOPOLDzY4",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"6334db9f6da3ce70cb69a12d\",\n    \"products\": [\n        {\n            \"clase_id\": \"637bece0dd3e13f5e62d318e\",\n            \"teacher_id\": \"632e520477327a248d71e152\",\n            \"tipo\": \"grupal\",\n            \"frecuencia\": \"mensual\",\n            \"contacto\": \"11111111111\",\n            \"horario\": \"8 PM\",\n            \"mensaje\": \"No puedo ningún otro horario.\"\n        }\n    ],\n    \"amount\": 120,\n    \"address\": {\n        \"city\": \"caba\",\n        \"country\": \"Argentina\",\n        \"line1\": \"asddsa\",\n        \"line2\": null,\n        \"postal_code\": \"122\",\n        \"state\": null\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clases/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Feedback",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkxNTY2MDcsImV4cCI6MTY2OTQxNTgwN30.Q603DuPtEyiLDdz77CJf47aSY0tg-ky_qOUOPOLDzY4",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clase_id\": \"637bec2ddd3e13f5e62d318c\",\n    \"rating\": 3.3,\n    \"message\": \"hola, la verdad que todo mal\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/feedback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"feedback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aceptar Contratacion",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjgyMTE5MjIsImV4cCI6MTY2ODQ3MTEyMn0.G-xDzAjHiFeouUq2qwv7ztNK3sWtFW13T0dHYDihaV0",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"637d4c94b7e9e518d0a7b32a\",\n    \"estado\": \"SOLICITADA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/orders/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Clases Contratadas",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/clases/alumno/contratadas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"alumno",
+								"contratadas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Clases",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/clases",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/clases/alumno/contratadas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clases",
+								"alumno",
+								"contratadas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tutor Data",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU1MjA0NzczMjdhMjQ4ZDcxZTE1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NjkzMjk5MTYsImV4cCI6MTY2OTU4OTExNn0.Uu6UdHuBwrfJm_VVIXNslKsVXOcHDACfpvyT_TDDnV8",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authentication",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzRkYjlmNmRhM2NlNzBjYjY5YTEyZCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg3MjM4NjksImV4cCI6MTY2ODk4MzA2OX0.yzoXCKxnUNDkCJxvFC90ZI0K_82nxzwm4xWPRXippho"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/tutor/clases",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tutor",
+								"clases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
