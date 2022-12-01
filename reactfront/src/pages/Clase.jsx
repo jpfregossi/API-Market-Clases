@@ -9,15 +9,12 @@ import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import ReactStars from 'react-stars';
 import { addComment, deleteComment, updateComment, setEditMode } from "../redux/apiCalls";
 import { getCommentsratings } from "../redux/apiCalls";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
-import DoneIcon from '@mui/icons-material/Done';
+
 
 
 const Container = styled.div``;
@@ -188,6 +185,19 @@ const Duo3 = styled.div`
   width: 100%;
 `;
 
+const Input = styled.input`
+  flex: 1;
+  min-width: 30%;
+  margin: 10px 0;
+  padding: 5px;
+`;
+const Input2 = styled.textarea`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+`;
+
+
 const Product = () => {
   const location = useLocation();
 
@@ -196,6 +206,10 @@ const Product = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("");
+  const [horario, setHorario] = useState("");
+  const [contacto, setContacto] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.products);
 
@@ -208,10 +222,9 @@ const Product = () => {
   const usr = useSelector((state)=>state.user.currentUser?  state.user.currentUser.username : "")
   const currentUser = useSelector((state)=>state.user.currentUser)
   const admin = useSelector((state)=>state.user.currentUser? state.user.currentUser.isAdmin : false)
+
   const comments = useSelector((state)=>state.commentsratings.commentsratings)
-  console.log(useSelector((state)=>state))
-  const edtmode = useSelector((state)=>state.commentsratings.editmode)
-  const err = useSelector((state)=>state.commentsratings.error)
+
 
   const ratingChanged = (newRating) => {
     setRating(newRating)
@@ -265,9 +278,7 @@ const Product = () => {
   }
 
   
-  const handleDelete = (commentid) => {
-    deleteComment(dispatch, commentid)
-  }
+
   useEffect(() => {
     getCommentsratings(dispatch, id);
   }, [dispatch]);
@@ -292,7 +303,7 @@ const Product = () => {
 
   const handleClick = (clr, sz) => {
     dispatch(
-      addProduct({ ...product, quantity, clr, sz })
+      addProduct({ ...product, quantity, clr, sz, horario, contacto, mensaje})
     );
   };
 
@@ -349,6 +360,14 @@ const Product = () => {
               </FilterSize>
             </Filter>
           </FilterContainer>
+          Horario: <Input placeholder="Ej: 9 PM" onChange={(e) => setHorario(e.target.value)}></Input>
+          <br></br>
+          Contacto: <Input placeholder="Ej: 116987654" onChange={(e) => setContacto(e.target.value)}></Input>
+          <br></br>
+          <div>
+            <h5>Ingrese un mensaje para el profesor:</h5>
+            <Input2 placeholder="Ej: Estoy disponible despues del mediodia" onChange={(e) => setMensaje(e.target.value)}></Input2>
+          </div>
           <AddContainer>
             <FilterTitle>Duracion: {product.duracion}hs</FilterTitle>
             <div style={{display:'flex', alignItems:"center"}}>
@@ -360,7 +379,9 @@ const Product = () => {
         <CommentContainer>
           <h2 style={{color:"teal", padding:" "}}>Comentarios</h2>
           {comments.map((comment)=>(
-            <Cwrapper>
+            <div>
+            {(comment.state === "PENDIENTE") && (
+              <Cwrapper>
               <Duo2>
                 <AccountCircleIcon style={{color:"teal"}}/>
                 <div style={{marginLeft:"5px"}}>{console.log()}</div>
@@ -372,17 +393,12 @@ const Product = () => {
               </Duo2>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                 <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.message}</span>
-                {admin ? 
-                <div style={{cursor:"pointer"}} id="iconcontainer">
-                </div>
-                : usr === comment.username ?
-                <div style={{cursor:"pointer"}} id="iconcontainer">
-                </div>
-                : <></>
-                }
               </div>
             </Cwrapper>
-          ))}
+            )}
+            </div>
+          )
+          )}
         </CommentContainer>
       </Wrapper>
       <Footer />

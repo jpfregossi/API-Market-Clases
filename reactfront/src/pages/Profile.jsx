@@ -53,10 +53,11 @@ const Profile = () => {
   const confirmedPass = useSelector((state) => state.user.confirmedPassword);
 
   const dispatch = useDispatch();
-    
+  const orders = useSelector((state)=>state.tutor.orders);
+  const token = useSelector((state)=>state.user.currentUser.accessToken);  
 
   useEffect(() => {
-    getUserOrders(dispatch,  id);
+    getUserOrders(dispatch,  token);
   }, [dispatch]);
 
   const handleClick = () => {
@@ -75,7 +76,7 @@ const Profile = () => {
             </Duo>
             {confirmedPass === null ? <></> : confirmedPass === true ? <Navigate to="/profile/securitysettings" /> : <span color="black">Contraseña equivocada</span>}
           </div>
-            <Link to="/profile/orders" style={{margin:"0.5% 0%"}}>
+            <Link orders={orders} to="/profile/orders" style={{margin:"0.5% 0%"}}>
               <Button>Mis Clases</Button>
             </Link>
         </Form>

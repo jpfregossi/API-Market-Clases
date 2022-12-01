@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
 const Clase = require("../models/Clase");
+const User = require("../models/User");
 const Feedback = require("../models/Feedback");
 const Contratacion = require("../models/Contratacion");
 const { getTutorClases } = require("./common");
@@ -15,13 +16,11 @@ const router = require("express").Router();
 
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
-
   try {
     const savedOrder = await newOrder.save();
-
     for (const product of req.body.products) {
-      console.log("Producto: ", product);
       const newContratacion = new Contratacion({
+        order_id: newOrder._id,
         alumno_id: req.user.id,
         teacher_id: product.teacher_id,
         clase_id: product.clase_id,
@@ -31,9 +30,11 @@ router.post("/", verifyToken, async (req, res) => {
         horario: product.horario,
         mensaje: product.mensaje,
       });
-
       await newContratacion.save();
+      newOrder.contratacion_id = newContratacion._id;
+      const savedOrder = await newOrder.save();
     };
+
 
     res.status(200).json(savedOrder);
   } catch (err) {
@@ -90,61 +91,48 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId", async (req, res) => {
-  try {
-    const orders = await Order.find({ userId: req.params.userId });
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
+router.get("/find", verifyToken, async (req, res) => {
+  if (req.user) {
+    
+    try {
+      let orders = await Order.find({ teacher_id: req.user.id });
+
+      let response = [];
+
+      for (let order of orders) {
+        let { __v, ...orderLimpia } = order._doc;
+        
+        let feedbacks = await Feedback.find({ user_id: order.userId });
+        let contratacionesAll = await Contratacion.find({ _id: order.contratacion_id });
+
+        let contrataciones = []
+        for (let contratacion of contratacionesAll) {
+
+          let feedback = feedbacks.find(f => f.user_id.toString() === contratacion.alumno_id.toString());
+          if(feedback === undefined){
+            feedback = new Feedback()
+            feedback.user_id = order.userId;
+            feedback.message = "";
+          }
+          console.log("ESTADO DEL FEEDBACK: " + feedback)
+
+          let { __v, ...contratacionLimpia} = contratacion._doc;
+          let nuevaContratacion = { ...contratacionLimpia, feedback };
+          contrataciones.push(nuevaContratacion);
+        }
+
+        let nuevaOrder = {
+            ...orderLimpia, contrataciones };
+        response.push(JSON.parse(JSON.stringify(nuevaOrder)));
+      } 
+
+      res.status(200).json(response);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log("Error: ", err);
+    }
   }
-});
+})
 
-// //GET ALL
-
-router.get("/", async (req, res) => {
-  try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// GET MONTHLY INCOME
-
-router.get("/income", verifyTokenAndAdmin, async (req, res) => {
-  const productId = req.query.pid;
-  const date = new Date();
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-
-  try {
-    const income = await Order.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: previousMonth },
-          ...(productId && {
-            products: { $elemMatch: { productId } },
-          }),
-        },
-      },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-          sales: "$amount",
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: "$sales" },
-        },
-      },
-    ]);
-    res.status(200).json(income);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 module.exports = router;

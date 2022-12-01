@@ -92,9 +92,9 @@ const Success = () => {
             teacher_id: item.teacher_id,
             tipo: item.tipo[0],
             frecuencia: item.frecuencia[0],
-            horario: "8 PM", // item.horario,
-            contacto: "111111111", // item.contacto,
-            mensaje: "Por favor confirmar horario", // item.mensaje
+            horario: item.horario, 
+            contacto: item.contacto, 
+            mensaje: item.mensaje
           })),
           amount: cart.total,
           address: data.billing_details.address,
