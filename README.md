@@ -17,7 +17,7 @@ https://docs.google.com/document/d/1pVnkrGIqm_zE70EweRZmKgVPKHFtB6_w/edit#headin
 
 ## Pruebas
 
-Importar: 
-TPO_API.postman_collection.json
-API-Market-Clases.postman_collection.json
-en POSTMAN
+**Importar en POSTMAN**: 
+- TPO_API.postman_collection.json
+- API-Market-Clases.postman_collection.json
+
