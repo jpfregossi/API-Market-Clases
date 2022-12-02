@@ -84,6 +84,7 @@ router.put("/block", verifyToken, async (req, res) => {
 // ACCEPT FEEDBACK
 router.put("/accept", verifyToken, async (req, res) => { 
   if (req.user) {
+    console.log(req.user)
     try {
       const updatedFeedback = await Feedback.findByIdAndUpdate(
         req.body.id,

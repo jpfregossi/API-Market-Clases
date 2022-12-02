@@ -108,7 +108,7 @@ router.get("/find", verifyToken, async (req, res) => {
         let contrataciones = []
         for (let contratacion of contratacionesAll) {
 
-          let feedback = feedbacks.find(f => f.user_id.toString() === contratacion.alumno_id.toString());
+          let feedback = feedbacks.find(f => f.clase_id.toString() === contratacion.clase_id.toString());
           if(feedback === undefined){
             feedback = new Feedback()
             feedback.user_id = order.userId;

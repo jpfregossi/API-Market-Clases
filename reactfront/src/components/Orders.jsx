@@ -128,14 +128,6 @@ export default function Orders({ orders }) {
   }
 
 
-  const totalCalcul = () => {
-    let rslt = 0;
-    for (let i=0; i < comments.length; i++) {
-      rslt += comments[i].rating
-    }
-    return rslt / comments.length
-  }
-
   return (
     <>  
         <Announcement/>
@@ -177,7 +169,7 @@ export default function Orders({ orders }) {
                         <div hidden={order.status!=="pending"}>
                             <CommentContainer>
                               {<h2 style={{padding:" "}}>Ingrese un comentario</h2>}
-                                {(order.contrataciones[0].feedback.message === "" ) && (
+                                {(order.contrataciones[0].feedback.message === "") && (
                                   <Duo>
                                     <input type="text" placeholder="Ingrese un comentario breve" style={{ outline:"1", width:"50%", marginLeft:"2%"}} onChange={(e) => setText(e.target.value)}/>
                                       <div style={{width:"50%", display:"flex", justifyContent:"right", alignItems:"center"}}>
@@ -187,7 +179,7 @@ export default function Orders({ orders }) {
                                       </div>        
                                   </Duo>)}
 
-                                  
+                                  {(order.contrataciones[0].feedback.message === "" ) || (
                                   <Cwrapper>
                                     <Duo2>
                                       <AccountCircleIcon style={{color:"teal"}}/>
@@ -201,7 +193,7 @@ export default function Orders({ orders }) {
                                       <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}}
                                       >{order.contrataciones[0].feedback.message}</span>
                                     </div>
-                                  </Cwrapper>
+                                  </Cwrapper>)}
 
                             </CommentContainer>
                           </div>
