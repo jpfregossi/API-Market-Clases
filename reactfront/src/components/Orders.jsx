@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { useEffect ,useState} from "react";
+import { publicRequest } from "../requestMethods";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
@@ -105,8 +106,6 @@ const Cwrapper = styled.div`
 export default function Orders({ orders }) {
 
   const location = useLocation();
-
-
   
   const currentUser = useSelector((state)=>state.user.currentUser);
   const comments = useSelector((state)=>state.commentsratings.commentsratings)
@@ -123,10 +122,11 @@ export default function Orders({ orders }) {
   const ratingChanged = (newRating) => {
     setRating(newRating)
   }
-  const handleClick = (id, username) => {
-    addComment(dispatch, id, username, rating, text, currentUser.accessToken )
-  }
 
+
+  const handleClick = (id, username) => {
+    addComment(dispatch, id, username, rating, text, currentUser.accessToken);
+  }
 
   return (
     <>  
@@ -142,7 +142,6 @@ export default function Orders({ orders }) {
           </Bar>
           <div>
             {orders.map((order) => {
-                {console.log(orders)}
                 let op = order.products
                 return (
                 <>
@@ -168,7 +167,7 @@ export default function Orders({ orders }) {
                       <Bar2>
                         <div hidden={order.status!=="pending"}>
                             <CommentContainer>
-                              {<h2 style={{padding:" "}}>Ingrese un comentario</h2>}
+                              {<h2 style={{padding:" "}}>Comentarios</h2>}
                                 {(order.contrataciones[0].feedback.message === "") && (
                                   <Duo>
                                     <input type="text" placeholder="Ingrese un comentario breve" style={{ outline:"1", width:"50%", marginLeft:"2%"}} onChange={(e) => setText(e.target.value)}/>
@@ -179,7 +178,7 @@ export default function Orders({ orders }) {
                                       </div>        
                                   </Duo>)}
 
-                                  {(order.contrataciones[0].feedback.message === "" ) || (
+                                  {(order.contrataciones[0].feedback.message === "" ) || ( 
                                   <Cwrapper>
                                     <Duo2>
                                       <AccountCircleIcon style={{color:"teal"}}/>

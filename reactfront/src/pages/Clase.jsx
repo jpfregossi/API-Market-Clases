@@ -380,7 +380,7 @@ const Product = () => {
           <h2 style={{color:"teal", padding:" "}}>Comentarios</h2>
           {comments.map((comment)=>(
             <div>
-            {(comment.state === "PENDIENTE") && (
+            {(comment.state === "PENDIENTE") || (
               <Cwrapper>
               <Duo2>
                 <AccountCircleIcon style={{color:"teal"}}/>

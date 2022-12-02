@@ -29,7 +29,7 @@ router.post("/", verifyToken, async (req, res) => {
       username: commitingUser.username,
       clase_id: req.body.clase_id,
       rating: req.body.rating,
-      message: req.body.message != undefined ? req.body.message : null,
+      message: req.body.message,
     });
   
     const savedFeedback = await newFeedback.save();
