@@ -277,7 +277,6 @@ export default function Dashboard({ clases }) {
     blockFeedback(dispatch, id, descargo, currentUser.accessToken);
   };
 
-  console.log("clases: ", clases);
 
   return (
     <div style={{ display: 'flex' }}>

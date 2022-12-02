@@ -46,18 +46,19 @@ export const register = async (dispatch, user) => {
   }
 };
 
-export const addComment = async (dispatch, id, rating, text, token) => {
+export const addComment = async (dispatch, id, username, rating, text, token) => {
   dispatch(addCommentStart());
   try {
     userRequest.interceptors.request.use(function (config) {
       config.headers.Authentication =  token;
       return config;
     });
-    console.log("id: " + id + " rating: " + rating + " text" + text + " token: " + token);
+    console.log("id: " + id + " username: " + username +  " rating: " + rating + " text: " + text + " token: " + token);
     const res = await userRequest.post("/feedback", {
       clase_id: id,
       rating: rating,
-      message: text
+      message: text,
+      username: username
     });
     dispatch(addCommentSuccess(res.data));
   } catch (err) {
@@ -138,27 +139,31 @@ export const newsletterregister = async (dispatch, user) => {
   }
 };
 
-export const getUserOrders = async (dispatch, userId) => {
+export const getUserOrders = async (dispatch, token) => {
   dispatch(getUserOrdersStart());
   try {
-    const res = await publicRequest.get(`/orders/find/${userId}`);
+    publicRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const res = await publicRequest.get(`/orders/find`);
     dispatch(getUserOrdersSuccess(res.data));
   } catch (err) {
     dispatch(getUserOrdersFailure());
   }
 };
 
-export const registerClase = async (dispatch, token, newClase) => {
-  dispatch(registerClaseStart());
+export const getTutorClases = async (dispatch, token) => {
+  dispatch(getTutorStart());
   try {
     userRequest.interceptors.request.use(function (config) {
       config.headers.Authentication =  token;
       return config;
     });
-    const res = await userRequest.post("/clases/register", newClase);
-    dispatch(registerClaseSuccess(res.data));
+    const res = await userRequest.get(`/tutor/clases`);
+    dispatch(getTutorSuccess(res.data));
   } catch (err) {
-    dispatch(registerClaseFailure());
+    dispatch(getTutorFailure());
   }
 };
 
@@ -190,19 +195,21 @@ export const deleteClase = async (dispatch, token, clase_id) => {
   }
 };
 
-export const getTutorClases = async (dispatch, token) => {
-  dispatch(getTutorStart());
+export const registerClase = async (dispatch, token, newClase) => {
+  dispatch(registerClaseStart());
   try {
     userRequest.interceptors.request.use(function (config) {
       config.headers.Authentication =  token;
       return config;
     });
-    const res = await userRequest.get(`/tutor/clases`);
-    dispatch(getTutorSuccess(res.data));
+    const res = await userRequest.post("/clases/register", newClase);
+    dispatch(registerClaseSuccess(res.data));
   } catch (err) {
-    dispatch(getTutorFailure());
+    dispatch(registerClaseFailure());
   }
 };
+
+
 
 export const acceptContratacion = async (dispatch, id, action, token) => {
   dispatch(acceptContratacionStart());

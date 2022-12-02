@@ -183,6 +183,10 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: cart.total,
         });
+        dispatch(
+          clearCart()
+        );
+        
         history("/success", {state:{stripeData: res.data,products: cart,}});
       } catch {}
     };
@@ -191,6 +195,7 @@ const Cart = () => {
 
 
   const handleClick = (x, y, z) => {
+    console.log(x,y,z)
     dispatch(
       removeProduct({x, y, z})
     );
@@ -234,6 +239,15 @@ const Cart = () => {
                     <ProductSize>
                       <b>Tipo:</b> {product.tipo}
                     </ProductSize>
+                    <ProductSize>
+                      <b>Horario:</b> {product.horario}
+                    </ProductSize>
+                    <ProductSize>
+                      <b>Contacto:</b> {product.contacto}
+                    </ProductSize>
+                    <ProductSize>
+                      <b>Mensaje:</b> {product.mensaje}
+                    </ProductSize>
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
@@ -273,8 +287,8 @@ const Cart = () => {
             </SummaryItem>
 
             <StripeCheckout
-              name="NO USAR DATOS REALES"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              name="Tarjeta 4242 4242 4242 4242"
+              image="https://cdn-icons-png.flaticon.com/512/834/834526.png"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}

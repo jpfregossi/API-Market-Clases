@@ -89,7 +89,7 @@ export default function Login() {
         <Form>
           <Input placeholder="usuario" onChange={(e) => setUsername(e.target.value)}/>
           <Input placeholder="contraseña" type="password" onChange={(e) => setPassword(e.target.value)}/>
-          <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
+          <Button onClick={handleClick} >LOGIN</Button>
           {error && <Error>Algo salio mal...</Error>}
           <Link to={"/reset-password"}><LinkStyle>No recuerdo la contraseña</LinkStyle></Link>
           <Link to="/register"><LinkStyle>Crear uan cuenta nueva</LinkStyle></Link>

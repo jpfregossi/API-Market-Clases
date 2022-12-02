@@ -7,7 +7,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from "./pages/Profile";
 import Security from "./pages/Security";
-import Orders from "./pages/Orders";
+import Order from "./pages/Order";
 import NwSuccess from "./pages/NwSuccess";
 import Tutor from "./pages/Tutor";
 import NewCourse from './pages/NewCourse';
@@ -22,7 +22,7 @@ function App() {
   const user = useSelector(state=>state.user.currentUser);
   const confirmedPass = useSelector((state) => state.user.confirmedPassword);
 
-  console.log("Usuario: ", user);
+  //console.log("Usuario: ", user);
   return (
      <Router>
       <Routes>
@@ -36,7 +36,7 @@ function App() {
         <Route path="/logout" element={user ? <Navigate to="/" />: <Register/>}></Route>
         <Route exact path="/profile" element={user ? <Profile /> : <Login/> }></Route>
         <Route path="/profile/securitysettings" element={user ? <Security /> : <Login/> }></Route>
-        <Route path="/profile/orders" element={user ? <Orders /> : <Login/> }></Route>
+        <Route path="/profile/orders" element={user ? <Order /> : <Login/> }></Route>
         <Route path="/newsletterregister" element={user? <NwSuccess /> : <Login/> }></Route>
         <Route path="/tutor" element={user && user.role === "profesor" ? <Tutor /> : <Login/> }></Route>
         <Route path="/tutor/newcourse" element={user && user.role === "profesor" ? <NewCourse /> : <Login/> }></Route>
