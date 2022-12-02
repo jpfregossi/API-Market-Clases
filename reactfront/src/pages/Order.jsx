@@ -10,7 +10,7 @@ export default function Order() {
   const token = useSelector((state)=>state.user.currentUser.accessToken);
 
   useEffect(() => {
-    getUserOrders(dispatch, user._id);
+    token && getUserOrders(dispatch, token);
   }, [dispatch]);
 
   return (

@@ -1,14 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
-import { registerClase } from "../redux/apiCalls";
+import { registerClase, updateClase } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { duration } from '@material-ui/core';
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router";
 
 const Container = styled.div`
   width: 100vw;
@@ -135,11 +132,11 @@ export default function NewCourse() {
   const [categories, setCategories] = useState(clase == null ? "" : clase.categories[0]);
   const [price, setPrice] = useState(clase == null ? "" : clase.price);
   const [duracion, setDuracion] = useState(clase == null ? "" : clase.duracion);
-  const [individual, setIndividual] = useState(true);
-  const [grupal, setGrupal] = useState(false);
-  const [frecUnica, setFrecUnica] = useState(true);
-  const [frecSemanal, setFrecSemanal] = useState(false);
-  const [frecMensual, setFrecMensual] = useState(false);
+  const [individual, setIndividual] = useState(clase == null ? true : (clase.tipo.includes("individual") ? true : false));
+  const [grupal, setGrupal] = useState(clase == null ? false : (clase.tipo.includes("grupal") ? true : false));
+  const [frecUnica, setFrecUnica] = useState(clase == null ? true : (clase.frecuencia.includes("unica") ? true : false));
+  const [frecSemanal, setFrecSemanal] = useState(clase == null ? false : (clase.frecuencia.includes("semanal") ? true : false));
+  const [frecMensual, setFrecMensual] = useState(clase == null ? false : (clase.frecuencia.includes("mensual") ? true : false));
   const [showModal, setShowModal] = useState(null);
 
   const nav = useNavigate();
@@ -160,7 +157,7 @@ export default function NewCourse() {
     if (individual) type.push("individual");
     if (grupal) type.push("grupal");
 
-    const clase = {
+    const nuevaClase = {
       title: title,
       desc: desc,
       img: img,
@@ -171,10 +168,10 @@ export default function NewCourse() {
       frecuencia: frecuencia,
     };
     console.log("nuevo curso user: ", currentUser);
-    console.log("registrando nuevo curso", clase);
-    await registerClase(dispatch, currentUser.accessToken, clase);
+    console.log("registrando nuevo curso", nuevaClase);
+    if (clase == null) await registerClase(dispatch, currentUser.accessToken, nuevaClase);
+    else await updateClase(dispatch, currentUser.accessToken, nuevaClase, clase._id);
     setShowModal(true);
-    //nav('/tutor');
   };
 
   const handleCategoryChange = (e) => {
@@ -292,7 +289,7 @@ export default function NewCourse() {
                 onChange={(e) => setDuracion(e.target.value)} required />
             </Label>
             <Buttons>
-              <Button type="submit" value="Submit" disabled={isFetching}>{clase === null ? "CREAR" : "MODIFICAR"}</Button>
+              <Button type="submit" value="Submit" disabled={isFetching}>{clase === undefined ? "CREAR" : "MODIFICAR"}</Button>
               <Link to="/" style={{ width: '50%' }}>
                 <Button type="cancel" value="Cancel" disabled={isFetching}>CANCELAR</Button>
               </Link>

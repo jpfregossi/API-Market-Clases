@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -60,7 +61,7 @@ const Error = styled.span`
   color: red;
 `;
 
-const Link = styled.a`
+const LinkStyle = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -72,11 +73,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
   };
+
+  console.log("user state: ", user);
 
   return (
     <Container>
@@ -87,8 +91,8 @@ export default function Login() {
           <Input placeholder="contraseña" type="password" onChange={(e) => setPassword(e.target.value)}/>
           <Button onClick={handleClick} >LOGIN</Button>
           {error && <Error>Algo salio mal...</Error>}
-          <Link>No recuerdo la contraseña</Link>
-          <Link>Crear uan cuenta nueva</Link>
+          <Link to={"/reset-password"}><LinkStyle>No recuerdo la contraseña</LinkStyle></Link>
+          <Link to="/register"><LinkStyle>Crear uan cuenta nueva</LinkStyle></Link>
         </Form>
       </Wrapper>
     </Container>

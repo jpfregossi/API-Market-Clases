@@ -1,9 +1,9 @@
 
-import { updateCredentialsStart, updateCredentialsSuccess, updateCredentialsSuccess2, getUserOrdersStart, getUserOrdersSuccess, getUserOrdersFailure, updateCredentialsFailure, loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, newsletterregisterStart,  newsletterregisterSuccess, newsletterregisterFailure, checkCurrentPasswordStart, checkCurrentPasswordSuccess, checkCurrentPasswordFailure} from "./userRedux";
+import { getUserOrdersStart, getUserOrdersSuccess, getUserOrdersFailure, updateCredentialsStart, updateCredentialsSuccess, updateCredentialsSuccess2, updateCredentialsSuccess3, updateCredentialsFailure, checkCurrentPasswordStart, checkCurrentPasswordSuccess, checkCurrentPasswordFailure, loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, newsletterregisterStart,  newsletterregisterSuccess, newsletterregisterFailure, resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from "./userRedux";
 import { addCommentStart, addCommentSuccess, addCommentFailure, getCommentStart, getCommentSuccess, getCommentFailure, deleteCommentStart, deleteCommentSuccess, deleteCommentFailure, editCommentStart, editCommentSuccess, editCommentFailure, setEditModeStart, setEditModeSuccess, setEditModeFailure } from "./commentsratingsRedux";
-import { registerClaseStart, registerClaseSuccess, registerClaseFailure, updateClaseStart, updateClaseSuccess, updateClaseFailure } from "./claseRedux";
+import {  } from "./claseRedux";
 import { userRequest, publicRequest } from "../requestMethods";
-import { getTutorStart, getTutorSuccess, getTutorFailure, acceptContratacionStart, acceptContratacionSuccess, acceptContratacionFailure, acceptFeedbackStart, acceptFeedbackSuccess, acceptFeedbackFailure, blockFeedbackStart, blockFeedbackSuccess, blockFeedbackFailure }  from "./tutorRedux";
+import { getTutorStart, getTutorSuccess, getTutorFailure, acceptContratacionStart, acceptContratacionSuccess, acceptContratacionFailure, acceptFeedbackStart, acceptFeedbackSuccess, acceptFeedbackFailure, blockFeedbackStart, blockFeedbackSuccess, blockFeedbackFailure, registerClaseStart, registerClaseSuccess, registerClaseFailure }  from "./tutorRedux";
 
 const CryptoJS = require("crypto-js");
 
@@ -167,6 +167,34 @@ export const getTutorClases = async (dispatch, token) => {
   }
 };
 
+export const updateClase = async (dispatch, token, newClase, clase_id) => {
+  dispatch(registerClaseStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const res = await userRequest.put("/clases/" + clase_id, newClase);
+    dispatch(registerClaseSuccess(res.data));
+  } catch (err) {
+    dispatch(registerClaseFailure());
+  }
+};
+
+export const deleteClase = async (dispatch, token, clase_id) => {
+  dispatch(registerClaseStart());
+  try {
+    userRequest.interceptors.request.use(function (config) {
+      config.headers.Authentication =  token;
+      return config;
+    });
+    const res = await userRequest.delete("/clases/" + clase_id);
+    dispatch(registerClaseSuccess(res.data));
+  } catch (err) {
+    dispatch(registerClaseFailure());
+  }
+};
+
 export const registerClase = async (dispatch, token, newClase) => {
   dispatch(registerClaseStart());
   try {
@@ -225,5 +253,26 @@ export const blockFeedback = async (dispatch, id, msg, token) => {
     dispatch(blockFeedbackSuccess(res.data));
   } catch (err) {
     dispatch(blockFeedbackFailure());
+  }
+};
+
+export const resetPassword = async (dispatch, id, token, password) => {
+  dispatch(resetPasswordStart());
+  try {
+    const req = { id: id, token: token, password: password };
+    const res = await publicRequest.post(`/auth/reset-password`, req);
+    dispatch(resetPasswordSuccess(res.data));
+  } catch (err) {
+    dispatch(resetPasswordFailure());
+  }
+};
+
+export const requestPasswordReset = async (email) => {
+  try {
+    const req = { email: email };
+    const res = await publicRequest.post(`auth/forgot-password`, req);
+    return res;
+  } catch (err) {
+    console.log("error al solicitar reseteo de contraseña");
   }
 };

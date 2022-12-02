@@ -95,7 +95,7 @@ router.get("/find", verifyToken, async (req, res) => {
   if (req.user) {
     
     try {
-      let orders = await Order.find({ teacher_id: req.user.id });
+      let orders = await Order.find({ user_id: req.user.id });
 
       let response = [];
 

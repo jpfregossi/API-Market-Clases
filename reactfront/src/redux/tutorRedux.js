@@ -56,9 +56,21 @@ const tutorSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    registerClaseStart: (state) => {
+      state.isFetching = true;
+    },
+    registerClaseSuccess: (state, action) => {
+      state.isFetching = false;
+      state.clases = action.payload;
+      state.error = false;
+    },
+    registerClaseFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
-export const { getTutorStart, getTutorSuccess, getTutorFailure, acceptContratacionStart, acceptContratacionSuccess, acceptContratacionFailure, acceptFeedbackStart, acceptFeedbackSuccess, acceptFeedbackFailure, blockFeedbackStart, blockFeedbackSuccess, blockFeedbackFailure } = tutorSlice.actions;
+export const { getTutorStart, getTutorSuccess, getTutorFailure, acceptContratacionStart, acceptContratacionSuccess, acceptContratacionFailure, acceptFeedbackStart, acceptFeedbackSuccess, acceptFeedbackFailure, blockFeedbackStart, blockFeedbackSuccess, blockFeedbackFailure, registerClaseStart, registerClaseSuccess, registerClaseFailure } = tutorSlice.actions;
 
 export default tutorSlice.reducer;
