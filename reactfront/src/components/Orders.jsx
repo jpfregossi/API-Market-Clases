@@ -8,6 +8,7 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import ReactStars from 'react-stars';
 import { addComment} from "../redux/apiCalls";
+import { Link } from "react-router-dom";
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -100,8 +101,12 @@ const Cwrapper = styled.div`
   
 `;
 
-
-
+const LinkStyle = styled.a`
+  text-decoration: none;
+  margin: 5px 0px;
+  font-size: 16px;
+  cursor: pointer;
+`;
 
 export default function Orders({ orders }) {
 
@@ -173,7 +178,7 @@ export default function Orders({ orders }) {
                                     <input type="text" placeholder="Ingrese un comentario breve" style={{ outline:"1", width:"50%", marginLeft:"2%"}} onChange={(e) => setText(e.target.value)}/>
                                       <div style={{width:"50%", display:"flex", justifyContent:"right", alignItems:"center"}}>
                                         <ReactStars count={5} size={24} color2={'yellow'} value={rating} onChange={ratingChanged}/>
-                                        <button style={{ border:"none", backgroundColor:"transparent", padding:"10px", cursor:"pointer", fontWeight:"600"}} onClick={()=>handleClick(order.contrataciones[0].clase_id, currentUser.username)}>Danos tu Opinion</button>
+                                        <button style={{ border:"none", backgroundColor:"transparent", padding:"10px", cursor:"pointer", fontWeight:"600"}} onClick={()=>handleClick(order.contrataciones[0].clase_id, currentUser.username)}><Link to="/profile"><LinkStyle>Dejar Comentario</LinkStyle></Link></button>
                                         {err && <span style={{color:"red"}}>Ocurrio un error !</span>}
                                       </div>        
                                   </Duo>)}
