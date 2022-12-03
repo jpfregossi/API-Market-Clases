@@ -95,26 +95,28 @@ router.get("/find", verifyToken, async (req, res) => {
   if (req.user) {
     
     try {
-      let orders = await Order.find({ user_id: req.user.id });
+      let orders = await Order.find({ userId: req.user.id });
 
       let response = [];
 
       for (let order of orders) {
         let { __v, ...orderLimpia } = order._doc;
         
-        let feedbacks = await Feedback.find({ user_id: order.userId });
+        let feedbacks = await Feedback.find({ user_id: order.userId.toString() });
         let contratacionesAll = await Contratacion.find({ _id: order.contratacion_id });
+
 
         let contrataciones = []
         for (let contratacion of contratacionesAll) {
 
-          let feedback = feedbacks.find(f => f.user_id.toString() === contratacion.alumno_id.toString());
+          let feedback = feedbacks.find(f => f.clase_id.toString() === contratacion.clase_id.toString());
+
           if(feedback === undefined){
             feedback = new Feedback()
             feedback.user_id = order.userId;
             feedback.message = "";
           }
-          console.log("ESTADO DEL FEEDBACK: " + feedback)
+          
 
           let { __v, ...contratacionLimpia} = contratacion._doc;
           let nuevaContratacion = { ...contratacionLimpia, feedback };
